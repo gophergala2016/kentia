@@ -7,10 +7,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
-	gin.SetMode(gin.DebugMode)
-	servidor := gin.Default()
+var servidor *gin.Engine
 
+func init() {
+	servidor = gin.Default()
+	gin.SetMode(gin.DebugMode)
+}
+
+func main() {
 	html := template.Must(template.ParseFiles("something.html"))
 	servidor.SetHTMLTemplate(html)
 
