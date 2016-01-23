@@ -1,7 +1,7 @@
 package modelo
 
 import (
-	"log"
+	"kentia/log"
 
 	"gopkg.in/mgo.v2"
 )
@@ -12,16 +12,17 @@ type conector struct {
 }
 
 // Realiza una conexión al servidor server y selecciona la BD de kentia
-func (c *conector) IniciarSesion() {
+func conectar() (c conector) {
 	session, err := mgo.Dial("mongodb://localhost")
 	if err != nil {
-		log.Println(err)
+		log.RegistrarError(err)
 	}
 	session.SetSafe(&mgo.Safe{})
 	c.db = session.DB("kentia")
+	return c
 }
 
 // Finaliza la conexión al servidor
-func (c *conector) CerrarSesion() {
+func (c *conector) desconectar() {
 	c.db.Logout()
 }
