@@ -16,9 +16,8 @@ const coleccionClima = "clima"
 
 //Registrar se encarga de registrar el clima en la BD
 func (c *Clima) Registrar() bool {
-	var conn conector
-	conn.IniciarSesion()
-	defer conn.CerrarSesion()
+	conn := conectar()
+	defer conn.desconectar()
 	err := conn.db.C(coleccionClima).Insert(c)
 	if err != nil {
 		log.RegistrarError(err)

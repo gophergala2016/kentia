@@ -16,9 +16,8 @@ const colecciontipoPrenda = "tipo_prenda"
 
 //Registrar se encarga de registrar el clima en la BD
 func (tp *tipoPrenda) Registrar() bool {
-	var conn conector
-	conn.IniciarSesion()
-	defer conn.CerrarSesion()
+	conn := conectar()
+	defer conn.desconectar()
 	err := conn.db.C(colecciontipoPrenda).Insert(tp)
 	if err != nil {
 		log.RegistrarError(err)
