@@ -6,7 +6,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-//tipo de clima para el que se usa esta prenda
+//Ocasion estructura para conocer la ocacion en quese usara la prenda
 type Ocasion struct {
 	ID     bson.ObjectId `bson:"_id"`
 	Nombre string
@@ -14,19 +14,19 @@ type Ocasion struct {
 
 const coleccionOcasion = "ocacion"
 
-func (c *Ocasion) Registar() bool {
+//Registrar un nuevo tipo de ocacion en la bd
+func (c *Ocasion) Registrar() bool {
 	conn := conectar()
 	defer conn.desconectar()
-err:
-	dao.db.C(coleccionOcacion).Insert(c)
+	err := conn.db.C(coleccionOcasion).Insert(c)
 	if err != nil {
-		log.RegistarError(err)
+		log.RegistrarError(err)
 		return false
 	}
 	return true
 }
 
-//Modificar
+//Modificar Modificar una prendacoleccionColor
 func (c *Ocasion) Modificar() bool {
 	conn := conectar()
 	defer conn.desconectar()

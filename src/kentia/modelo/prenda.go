@@ -6,14 +6,14 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-//Clima tipo de clima para el que se usa esta prenda
+//Prenda .
 type Prenda struct {
 	ID          bson.ObjectId `bson:"_id"`
 	Luminucidad int
 	Foto        string
 	Color       Color
 	Clima       Clima
-	Tipoprenda  tipoPrenda
+	Tipoprenda  TipoPrenda
 	Ocasion     Ocasion
 	Usuario     Usuario
 }
@@ -21,18 +21,18 @@ type Prenda struct {
 const coleccionPrenda = "prenda"
 
 //Registar funcion para cargar clima
-func (c *Prenda) Registar() {
-	var conn conector
-	conn.IniciarSesion()
-	defer conn.CerrarSesion()
-err:
-	dao.db.C(coleccionPrenda).Insert(c)
+func (c *Prenda) Registar() bool {
+	conn := conectar()
+	defer conn.desconectar()
+	err := conn.db.C(coleccionPrenda).Insert(c)
 	if err != nil {
-		lod.RegistarError(err)
+		log.RegistrarError(err)
 		return false
 	}
 	return true
 }
+
+//Modificar datos de una prenda en la base
 func (c *Prenda) Modificar() bool {
 	conn := conectar()
 	defer conn.desconectar()
