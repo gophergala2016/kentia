@@ -1,17 +1,21 @@
 package modelo
 
-import "gopkg.in/mgo.v2/bson"
+import (
+	"kentia/log"
+
+	"gopkg.in/mgo.v2/bson"
+)
 
 //Clima tipo de clima para el que se usa esta prenda
 type Prenda struct {
-	ID         bson.ObjectId `bson:"_id" form:"id"`
-	Tono       int
-	Foto       string
-	color      Color
-	clima      Clima
-	tipoprenda tipoPrenda
-	ocasion    Ocasion
-	usuario    Usuario
+	ID          bson.ObjectId `bson:"_id"`
+	Luminucidad int
+	Foto        string
+	Color       Color
+	Clima       Clima
+	Tipoprenda  tipoPrenda
+	Ocasion     Ocasion
+	Usuario     Usuario
 }
 
 const coleccionPrenda = "prenda"
@@ -25,6 +29,40 @@ err:
 	dao.db.C(coleccionPrenda).Insert(c)
 	if err != nil {
 		lod.RegistarError(err)
+		return false
+	}
+	return true
+}
+func (c *Prenda) Modificar() bool {
+	conn := conectar()
+	defer conn.desconectar()
+	err := conn.db.C(coleccionPrenda).UpdateId(c.ID, c)
+	if err != nil {
+		log.RegistrarError(err)
+		return false
+	}
+	return true
+}
+
+//ConsultarPrendas regresa un catálogo de prendas
+func ConsultarPrendas() (prendas []Prenda) {
+	conn := conectar()
+	defer conn.desconectar()
+	err := conn.db.C(coleccionPrenda).Find(bson.M{}).All(&prendas)
+	if err != nil {
+		log.RegistrarError(err)
+		return prendas
+	}
+	return prendas
+}
+
+//BuscarPorID busca en la BD un color que coincida con el ID dado
+func (c *Prenda) BuscarPorID() bool {
+	conn := conectar()
+	defer conn.desconectar()
+	err := conn.db.C(coleccionPrenda).FindId(c.ID).One(c)
+	if err != nil {
+		log.RegistrarError(err)
 		return false
 	}
 	return true

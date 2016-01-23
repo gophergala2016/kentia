@@ -25,3 +25,39 @@ err:
 	}
 	return true
 }
+
+//Modificar
+func (c *Ocasion) Modificar() bool {
+	conn := conectar()
+	defer conn.desconectar()
+	err := conn.db.C(coleccionOcasion).UpdateId(c.ID, c)
+	if err != nil {
+		log.RegistrarError(err)
+		return false
+	}
+	return true
+}
+
+//ConsultarOcasion regresa un catálogo de colores
+func ConsultarOcasion() (ocasiones []Ocasion) {
+	conn := conectar()
+	defer conn.desconectar()
+	err := conn.db.C(coleccionOcasion).Find(bson.M{}).All(&ocasiones)
+	if err != nil {
+		log.RegistrarError(err)
+		return ocasiones
+	}
+	return ocasiones
+}
+
+//BuscarPorID busca en la BD un cllima que coincida con el ID dado
+func (c *Ocasion) BuscarPorID() bool {
+	conn := conectar()
+	defer conn.desconectar()
+	err := conn.db.C(coleccionOcasion).FindId(c.ID).One(c)
+	if err != nil {
+		log.RegistrarError(err)
+		return false
+	}
+	return true
+}
