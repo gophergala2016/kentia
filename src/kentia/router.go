@@ -2,6 +2,7 @@ package main
 
 import (
 	"html/template"
+	"kentia/controlador"
 
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
@@ -19,5 +20,6 @@ func main() {
 	servidor.SetHTMLTemplate(html)
 
 	servidor.Use(static.Serve("/", static.LocalFile("./other", false)))
+	servidor.POST("/ProcesarRegistroUsuario", controlador.ProcesarRegistroUsuario())
 	servidor.Run(":3000")
 }
