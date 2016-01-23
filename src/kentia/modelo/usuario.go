@@ -11,5 +11,5 @@ type Usuario struct {
 	Correo     string
 	Contraseña string
 	Genero     string
+	Prendas    []Prenda
 }
-u
