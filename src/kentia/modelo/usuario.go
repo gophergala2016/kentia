@@ -1,8 +1,9 @@
 package modelo
 
 import (
-	"gopkg.in/mgo.v2/bson"
 	"kentia/log"
+
+	"gopkg.in/mgo.v2/bson"
 )
 
 type Usuario struct {
