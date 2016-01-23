@@ -45,7 +45,6 @@ func ConsultarTiposPrenda() (tiposPrenda []TipoPrenda) {
 	err := conn.db.C(coleccionTipoPrenda).Find(bson.M{}).All(&tiposPrenda)
 	if err != nil {
 		log.RegistrarError(err)
-		return tiposPrenda
 	}
 	return tiposPrenda
 }

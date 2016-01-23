@@ -46,8 +46,8 @@ func ConsultarColores() (colores []Color) {
 	err := conn.db.C(coleccionColor).Find(bson.M{}).All(&colores)
 	if err != nil {
 		log.RegistrarError(err)
-		return colores
 	}
+	
 	return colores
 }
 

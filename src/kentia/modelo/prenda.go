@@ -51,7 +51,6 @@ func ConsultarPrendas() (prendas []Prenda) {
 	err := conn.db.C(coleccionPrenda).Find(bson.M{}).All(&prendas)
 	if err != nil {
 		log.RegistrarError(err)
-		return prendas
 	}
 	return prendas
 }

@@ -34,7 +34,7 @@ func (u *Usuario) Registrar() bool {
 func (u *Usuario) Modificar() bool {
 	conn := conectar()
 	defer conn.desconectar()
-	err := conn.db.C(coleccionUsuario).UpdateId(c.ID, c)
+	err := conn.db.C(coleccionUsuario).UpdateId(u.ID, u)
 	if err != nil {
 		log.RegistrarError(err)
 		return false
@@ -49,9 +49,9 @@ func ConsultarUsuarios() (usuarios []Usuario) {
 	err := conn.db.C(coleccionUsuario).Find(bson.M{}).All(&usuarios)
 	if err != nil {
 		log.RegistrarError(err)
-		return false
 	}
-	return true
+
+	return usuarios
 }
 
 //BuscarPorID busca un usuario en la DB por ID

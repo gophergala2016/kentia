@@ -45,7 +45,6 @@ func ConsultarOcasion() (ocasiones []Ocasion) {
 	err := conn.db.C(coleccionOcasion).Find(bson.M{}).All(&ocasiones)
 	if err != nil {
 		log.RegistrarError(err)
-		return ocasiones
 	}
 	return ocasiones
 }

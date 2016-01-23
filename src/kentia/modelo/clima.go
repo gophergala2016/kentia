@@ -46,7 +46,6 @@ func ConsultarClima() (climas []Clima) {
 	err := conn.db.C(coleccionClima).Find(bson.M{}).All(&climas)
 	if err != nil {
 		log.RegistrarError(err)
-		return climas
 	}
 	return climas
 }
