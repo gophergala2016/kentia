@@ -1,7 +1,7 @@
 package modelo
 
 import (
-	"log"
+	"kentia/log"
 
 	"gopkg.in/mgo.v2/bson"
 )

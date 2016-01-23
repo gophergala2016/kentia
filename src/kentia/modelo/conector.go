@@ -1,7 +1,7 @@
 package modelo
 
 import (
-	"log"
+	"kentia/log"
 
 	"gopkg.in/mgo.v2"
 )
@@ -15,7 +15,7 @@ type conector struct {
 func (c *conector) IniciarSesion() {
 	session, err := mgo.Dial("mongodb://localhost")
 	if err != nil {
-		log.Println(err)
+		log.RegistrarError(err)
 	}
 	session.SetSafe(&mgo.Safe{})
 	c.db = session.DB("kentia")
