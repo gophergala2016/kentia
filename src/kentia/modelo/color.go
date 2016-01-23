@@ -16,9 +16,8 @@ const coleccionColor = "color"
 
 //Registrar se encarga de registrar el color en la BD
 func (c *Color) Registrar() bool {
-	var conn conector
-	conn.IniciarSesion()
-	defer conn.CerrarSesion()
+	conn := conectar()
+	defer conn.desconectar()
 	err := conn.db.C(coleccionColor).Insert(c)
 	if err != nil {
 		log.RegistrarError(err)
