@@ -1,10 +1,12 @@
 package modelo
 
 import (
-	"gopkg.in/mgo.v2/bson"
 	"kentia/log"
+
+	"gopkg.in/mgo.v2/bson"
 )
 
+//Usuario define los valores que identifican a un usario del sistema
 type Usuario struct {
 	ID         bson.ObjectId `bson:"_id"`
 	Nombre     string
@@ -16,7 +18,7 @@ type Usuario struct {
 
 const coleccionUsuario = "usuario"
 
-//Registrar. Registra un usuario en la DB
+//Registrar registra un usuario en la DB
 func (u *Usuario) Registrar() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -28,7 +30,7 @@ func (u *Usuario) Registrar() bool {
 	return true
 }
 
-//Modificar. Modifica un usuario en la DB
+//Modificar modifica un usuario en la DB
 func (u *Usuario) Modificar() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -40,7 +42,7 @@ func (u *Usuario) Modificar() bool {
 	return true
 }
 
-//Consultar. Regresa el catálogo de usuarios
+//ConsultarUsuarios regresa el catálogo de usuarios
 func ConsultarUsuarios() (usuarios []Usuario) {
 	conn := conectar()
 	defer conn.desconectar()
@@ -52,8 +54,8 @@ func ConsultarUsuarios() (usuarios []Usuario) {
 	return true
 }
 
-//BuscarPorID. Busca un usuario en la DB por ID
-func (u *Usario) BuscarPorID() bool {
+//BuscarPorID busca un usuario en la DB por ID
+func (u *Usuario) BuscarPorID() bool {
 	conn := conectar()
 	defer conn.desconectar()
 	err := conn.db.C(coleccionUsuario).Find(u.ID).One(u)
