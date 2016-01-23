@@ -10,6 +10,12 @@ import (
 func RegistroUsuario() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var u modelo.Usuario
-		c.Bind(&u)
+		if c.Bind(&u) == nil {
+			if u.Registrar() {
+				//Correcto
+			} else {
+				//Algo salio mal
+			}
+		}
 	}
 }
