@@ -2,26 +2,35 @@ package main
 
 import (
 	"html/template"
-	"net/http"
+	"kentia/controlador"
 
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
-var servidor *gin.Engine
+var (
+	html     *template.Template
+	servidor *gin.Engine
+)
 
 func init() {
 	gin.SetMode(gin.DebugMode)
 	servidor = gin.Default()
+	cargarTemplates()
 	servidor.Use(static.Serve("/", static.LocalFile("./public", false)))
-	servidor.GET("/", func(c *gin.Context) {
-		c.Redirect(http.StatusOK, "index.html")
+	servidor.StaticFile("/", "./public/index.html")
+	servidor.NoRoute(func(c *gin.Context) {
+		html.ExecuteTemplate(c.Writer, "404.html", nil)
 	})
 }
 
-func main() {
-	html := template.Must(template.ParseFiles("something.html"))
+func cargarTemplates() {
+	html = template.Must(template.ParseFiles("public/404.html"))
 	servidor.SetHTMLTemplate(html)
+}
 
+func main() {
+
+	servidor.POST("/registroUsuario", controlador.RegistroUsuario())
 	servidor.Run(":3000")
 }
