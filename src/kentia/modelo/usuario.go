@@ -9,10 +9,10 @@ import (
 //Usuario define los valores que identifican a un usario del sistema
 type Usuario struct {
 	ID         bson.ObjectId `bson:"_id"`
-	Nombre     string
-	Correo     string
-	Contraseña string
-	Genero     string
+	Nombre     string        `form:"nombre"`
+	Correo     string        `form:"correo"`
+	Contraseña string        `form:"pass"`
+	Genero     string        `form:"genero"`
 	Prendas    []Prenda
 }
 
