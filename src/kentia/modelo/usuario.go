@@ -22,6 +22,7 @@ const coleccionUsuario = "usuario"
 func (u *Usuario) Registrar() bool {
 	conn := conectar()
 	defer conn.desconectar()
+	u.ID = bson.NewObjectId()
 	err := conn.db.C(coleccionUsuario).Insert(u)
 	if err != nil {
 		log.RegistrarError(err)
