@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"kentia/controlador"
 
+	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
@@ -16,6 +17,10 @@ var (
 func init() {
 	gin.SetMode(gin.DebugMode)
 	servidor = gin.Default()
+
+	store := sessions.NewCookieStore([]byte("ef7fbfd3d599befe7a86cbf37c8f05c814dcad918b8dbefb441de846c4f62ea3"))
+	servidor.Use(sessions.Sessions("mysession", store))
+
 	cargarTemplates()
 	servidor.Use(static.Serve("/", static.LocalFile("./public", false)))
 	servidor.StaticFile("/", "./public/index.html")
