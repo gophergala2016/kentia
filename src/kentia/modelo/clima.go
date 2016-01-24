@@ -39,8 +39,8 @@ func (c *Clima) Modificar() bool {
 	return true
 }
 
-//ConsultarClima regresa un catálogo de colores
-func ConsultarClima() (climas []Clima) {
+//ConsultarClimas regresa un catálogo de colores
+func ConsultarClimas() (climas []Clima) {
 	conn := conectar()
 	defer conn.desconectar()
 	err := conn.db.C(coleccionClima).Find(bson.M{}).All(&climas)

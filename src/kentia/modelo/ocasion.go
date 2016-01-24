@@ -38,8 +38,8 @@ func (c *Ocasion) Modificar() bool {
 	return true
 }
 
-//ConsultarOcasion regresa un catálogo de colores
-func ConsultarOcasion() (ocasiones []Ocasion) {
+//ConsultarOcasiones regresa un catálogo de colores
+func ConsultarOcasiones() (ocasiones []Ocasion) {
 	conn := conectar()
 	defer conn.desconectar()
 	err := conn.db.C(coleccionOcasion).Find(bson.M{}).All(&ocasiones)

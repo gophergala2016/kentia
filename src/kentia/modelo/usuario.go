@@ -8,12 +8,13 @@ import (
 
 //Usuario define los valores que identifican a un usario del sistema
 type Usuario struct {
-	ID         bson.ObjectId `bson:"_id"`
-	Nombre     string        `form:"nombre" binding:"required"`
-	Correo     string        `form:"correo" binding:"required"`
-	Contraseña string        `form:"pass" binding:"required"`
-	Genero     string        `form:"genero" binding:"required"`
-	Prendas    []Prenda
+	ID            bson.ObjectId `bson:"_id"`
+	Nombre        string        `form:"nombre" binding:"required"`
+	Correo        string        `form:"correo" binding:"required"`
+	Contraseña    string        `form:"pass" binding:"required"`
+	Genero        string        `form:"genero" binding:"required"`
+	Prendas       []Prenda
+	Combinaciones []Combinacion
 }
 
 const coleccionUsuario = "usuario"
@@ -22,6 +23,7 @@ const coleccionUsuario = "usuario"
 func (u *Usuario) Registrar() bool {
 	conn := conectar()
 	defer conn.desconectar()
+	u.ID = bson.NewObjectId()
 	err := conn.db.C(coleccionUsuario).Insert(u)
 	if err != nil {
 		log.RegistrarError(err)
