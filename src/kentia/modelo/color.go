@@ -8,7 +8,7 @@ import (
 
 //Color es la estructura que definen los colores de la prenda
 type Color struct {
-	ID     bson.ObjectId `bson:"_id"`
+	ID     bson.ObjectId `bson:"_id" form:"color" binding:"required"`
 	Tono   int
 	Nombre string
 }
@@ -47,7 +47,7 @@ func ConsultarColores() (colores []Color) {
 	if err != nil {
 		log.RegistrarError(err)
 	}
-	
+
 	return colores
 }
 

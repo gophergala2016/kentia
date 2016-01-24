@@ -1,4 +1,4 @@
-package logica
+package controlador
 
 import (
 	"kentia/modelo"
@@ -16,10 +16,10 @@ func (mapa MapaInfo) SetInformacion(args ...interface{}) {
 
 //ObtenerDatosRegistroPrenda le agraga datos necesarios al mapa para el registro de una prenda
 func (mapa MapaInfo) ObtenerDatosRegistroPrenda() {
-	mapa.SetInformacionMapa(
+	mapa.SetInformacion(
 		"climas", modelo.ConsultarClimas(),
 		"colores", modelo.ConsultarColores(),
-		"ocaciones", modelo.ConsultarOcasiones(),
+		"ocasiones", modelo.ConsultarOcasiones(),
 		"tiposPrenda", modelo.ConsultarTiposPrenda(),
 	)
 }

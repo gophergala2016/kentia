@@ -10,8 +10,9 @@ import (
 //Combinacion es la estructura que definen los colores de la prenda
 type Combinacion struct {
 	ID       bson.ObjectId `bson:"_id"`
-	Nombre   string
+	Prendas  []Prenda
 	FechaUso []time.Time
+	Favorito bool
 }
 
 const coleccionCombinacion = "combinacion"

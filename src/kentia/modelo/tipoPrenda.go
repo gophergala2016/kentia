@@ -8,7 +8,7 @@ import (
 
 //TipoPrenda es la estructura que define los climas para los que se usara la prenda
 type TipoPrenda struct {
-	ID     bson.ObjectId `bson:"_id"`
+	ID     bson.ObjectId `bson:"_id" form:"tiposPrenda" binding:"required"`
 	Nombre string
 }
 

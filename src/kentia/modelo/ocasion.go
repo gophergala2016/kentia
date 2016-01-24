@@ -8,7 +8,7 @@ import (
 
 //Ocasion estructura para conocer la ocacion en quese usara la prenda
 type Ocasion struct {
-	ID     bson.ObjectId `bson:"_id"`
+	ID     bson.ObjectId `bson:"_id" form:"ocasiones" binding:"required"`
 	Nombre string
 }
 
@@ -38,8 +38,8 @@ func (c *Ocasion) Modificar() bool {
 	return true
 }
 
-//ConsultarOcasion regresa un catálogo de colores
-func ConsultarOcasion() (ocasiones []Ocasion) {
+//ConsultarOcasiones regresa un catálogo de colores
+func ConsultarOcasiones() (ocasiones []Ocasion) {
 	conn := conectar()
 	defer conn.desconectar()
 	err := conn.db.C(coleccionOcasion).Find(bson.M{}).All(&ocasiones)
