@@ -32,11 +32,14 @@ func init() {
 func cargarTemplates() {
 	html = template.Must(template.ParseFiles(
 		"public/404.html",
-		"templates/registroPrenda.html"))
+		"templates/registroPrenda.html", "templates/combinacion.html"))
 	servidor.SetHTMLTemplate(html)
 }
 
 func main() {
+	servidor.GET("/combinacion", func(c *gin.Context) {
+		html.ExecuteTemplate(c.Writer, "combinacion.html", nil)
+	})
 	servidor.GET("/registroPrenda", controlador.RegistroPrendaGET(html))
 	servidor.GET("/", controlador.Index())
 	servidor.POST("/login", controlador.Login(html))
