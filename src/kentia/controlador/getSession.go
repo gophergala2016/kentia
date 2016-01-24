@@ -1,7 +1,6 @@
 package controlador
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/contrib/sessions"
@@ -25,7 +24,6 @@ func GetSession(session interface{}) bson.ObjectId {
 func Index() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		usuarioID := GetSession(sessions.Default(c).Get("UsuarioID"))
-		fmt.Println(usuarioID)
 		if usuarioID != bson.ObjectId(0) {
 			c.Redirect(http.StatusTemporaryRedirect, "/registroPrenda")
 			return

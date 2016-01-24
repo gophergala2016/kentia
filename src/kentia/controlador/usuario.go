@@ -1,7 +1,6 @@
 package controlador
 
 import (
-	"fmt"
 	"html/template"
 	"kentia/modelo"
 	"net/http"
@@ -20,7 +19,6 @@ func Login(html *template.Template) gin.HandlerFunc {
 		c.Bind(&usuario)
 
 		isOk := usuario.IniciarSesion()
-		fmt.Println(usuario, isOk)
 		if !isOk {
 			session.Set("UsuarioID", bson.ObjectId(0))
 		}
