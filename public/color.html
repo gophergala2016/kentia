@@ -21,11 +21,35 @@
     <area href="javascript:alert('moradorosa');" shape="poly" coords="120,135,20,195,5,135" data-alt="moradorosa" data-title="moradorosa"/>
     <area href="javascript:alert('rosa');" shape="poly" coords="125,130,10,130,20,70" data-alt="rosa" data-title="rosa"/>
   </map>
+  <table style="height:148; width:50; border:solid">
+    <tr>
+      <td bgcolor="#FFFFFF" name="blanco" id="14"></td>
+    </tr>
+    <tr>
+      <td bgcolor="#848484" name="gris" id="13"></td>
+    </tr>
+    <tr>
+      <td bgcolor="#000000" name="negro" id="12"></td>
+    </tr>
+  </table>
+  <table style="height:148; width:50; border:solid">
+    <tr>
+      <td style="background-image:url(img/clara.jpg)" name="claro" id="17"></td>
+    </tr>
+    <tr>
+      <td style="background-image:url(img/media.jpg)" name="medio" id="16"></td>
+    </tr>
+    <tr>
+      <td style="background-image:url(img/obscura.jpg)" name="obscuro" id="15"></td>
+    </tr>
+  </table>
 </body>
 <script>
 $(document).ready(function ()
 {
-
+  $(document).on('click','td',function(e) {
+  alert(e.target.id);
+  });
 $('#paleta').mapster({
           fillColor: 'ffffff',
           fillOpacity: 0.1,
