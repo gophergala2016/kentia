@@ -8,8 +8,8 @@ import (
 
 //Color es la estructura que definen los colores de la prenda
 type Color struct {
-	ID     bson.ObjectId `bson:"_id" form:"color" binding:"required"`
-	Tono   int
+	ID     bson.ObjectId `bson:"_id"`
+	Tono   int           `form:"tono" binding:"required"`
 	Nombre string
 }
 

@@ -9,10 +9,10 @@ import (
 //Usuario define los valores que identifican a un usario del sistema
 type Usuario struct {
 	ID            bson.ObjectId `bson:"_id"`
-	Nombre        string        `form:"nombre" binding:"required"`
+	Nombre        string        `form:"nombre"`
 	Correo        string        `form:"correo" binding:"required"`
 	Contraseña    string        `form:"pass" binding:"required"`
-	Genero        string        `form:"genero" binding:"required"`
+	Genero        string        `form:"genero"`
 	Prendas       []Prenda
 	Combinaciones []Combinacion
 }
@@ -54,6 +54,21 @@ func ConsultarUsuarios() (usuarios []Usuario) {
 	}
 
 	return usuarios
+}
+
+//IniciarSesion comprueba las credenciales y autoriza una sesion
+func (u *Usuario) IniciarSesion() bool {
+	conn := conectar()
+	defer conn.desconectar()
+	query := bson.M{"$and": []interface{}{
+		bson.M{"correo": u.Correo},
+		bson.M{"contraseña": u.Contraseña}}}
+	err := conn.db.C(coleccionUsuario).Find(query).One(u)
+	if err != nil {
+		log.RegistrarError(err)
+		return false
+	}
+	return true
 }
 
 //BuscarPorID busca un usuario en la DB por ID
