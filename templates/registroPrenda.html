@@ -7,7 +7,12 @@
 
     <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="js/jquery.imagemapster.js"></script>
-
+    <script type="text/javascript">
+      function seleccionarColor(tono,color){
+        $('#tono').val(tono);
+        $('#muestraColor').css({ 'background':color});
+      }
+    </script>
     <title>Registro de Prenda</title>
 
     <style>
@@ -89,41 +94,42 @@
                       </div>
                     </div>
                   </div>
+
                   <div class="form-group">
                     <label class="col-lg-3 control-label">Selecciona el color de la prenda</label>
                     <div class="col-lg-2" id="rueda" name="rueda">
                       <img style="align:center"class="palet" src="img/colorwhel.svg" usemap="#PaletaMap" id="paleta" alt="paleta"/>
                       <map name="PaletaMap">
-                        <area href="javascript:$('#tono').val('0');" shape="poly" coords="130,120,75,20,130,5" data-alt="rojo" data-title="rojo"/>
-                        <area href="javascript:$('#tono').val('1');" shape="poly" coords="140,115,135,3,195,20" data-alt="naranja" data-title="naranja"/>
-                        <area href="javascript:$('#tono').val('2');" shape="poly" coords="150,120,200,25,240,65" data-alt="amarillo" data-title="amarillo"/>
-                        <area href="javascript:$('#tono').val('3');" shape="poly" coords="150,130,260,130,245,70" data-alt="verdeamarillo" data-title="verde"/>
-                        <area href="javascript:$('#tono').val('4');" shape="poly" coords="150,135,245,190,258,135" data-alt="verde" data-title="masverde"/>
-                        <area href="javascript:$('#tono').val('5);" shape="poly" coords="150,145,200,240,240,195" data-alt="verdeazul" data-title="verdeazul"/>
-                        <area href="javascript:$('#tono').val('6');" shape="poly" coords="140,145,135,260,195,240" data-alt="azul" data-title="azul"/>
-                        <area href="javascript:$('#tono').val('7');" shape="poly" coords="130,140,75,245,130,255" data-alt="azulvioleta" data-title="azulmorado"/>
-                        <area href="javascript:$('#tono').val('8');" shape="poly" coords="120,140,20,200,70,240" data-alt="vlioleta" data-title="morado"/>
-                        <area href="javascript:$('#tono').val('9');" shape="poly" coords="120,135,20,195,5,135" data-alt="moradomalva" data-title="moradorosa"/>
-                        <area href="javascript:$('#tono').val('10');" shape="poly" coords="125,130,10,130,20,70" data-alt="moradorosa" data-title="rosa"/>
-                        <area href="javascript:$('#tono').val('11');" shape="poly" coords="120,120,25,65,70,23" data-alt="rosa" data-title="rosarojo"/>
+                        <area href="javascript:seleccionarColor(0,'#ED1E24');" shape="poly" coords="130,120,75,20,130,5" data-alt="rojo" data-title="rojo"/>
+                        <area href="javascript:seleccionarColor(1,'#FBA51A');" shape="poly" coords="140,115,135,3,195,20" data-alt="naranja" data-title="naranja"/>
+                        <area href="javascript:seleccionarColor(2,'#F4EB20');" shape="poly" coords="150,120,200,25,240,65" data-alt="amarillo" data-title="amarillo"/>
+                        <area href="javascript:seleccionarColor(3,'#9BCA3C');" shape="poly" coords="150,130,260,130,245,70" data-alt="verdeamarillo" data-title="verde"/>
+                        <area href="javascript:seleccionarColor(4,'#71C055');" shape="poly" coords="150,135,245,190,258,135" data-alt="verde" data-title="masverde"/>
+                        <area href="javascript:seleccionarColor(5,'#71C6A5')" shape="poly" coords="150,145,200,240,240,195" data-alt="verdeazul" data-title="verdeazul"/>
+                        <area href="javascript:seleccionarColor(6,'#40B8EA');" shape="poly" coords="140,145,135,260,195,240" data-alt="azul" data-title="azul"/>
+                        <area href="javascript:seleccionarColor(7,'#436FB6');" shape="poly" coords="130,140,75,245,130,255" data-alt="azulvioleta" data-title="azulmorado"/>
+                        <area href="javascript:seleccionarColor(8,'#5B52A3');" shape="poly" coords="120,140,20,200,70,240" data-alt="vlioleta" data-title="morado"/>
+                        <area href="javascript:seleccionarColor(9,'#8750A1');" shape="poly" coords="120,135,20,195,5,135" data-alt="moradomalva" data-title="moradorosa"/>
+                        <area href="javascript:seleccionarColor(10,'#D1499B');" shape="poly" coords="125,130,10,130,20,70" data-alt="moradorosa" data-title="rosa"/>
+                        <area href="javascript:seleccionarColor(11,'#EC197A');" shape="poly" coords="120,120,25,65,70,23" data-alt="rosa" data-title="rosarojo"/>
                       </map>
                     </div>
 
                     <div class="col-sm-2" id="monocro" name="monocro">
                       <table class="table" style="height:148; width:50; border:solid">
                         <tr>
-                          <td bgcolor="#FFFFFF" name="blanco" id="14"></td>
+                          <td bgcolor="#FFFFFF" name="white" id="14"></td>
                         </tr>
                         <tr>
-                          <td bgcolor="#848484" name="gris" id="13"></td>
+                          <td bgcolor="#848484" name="gray" id="13"></td>
                         </tr>
                         <tr>
-                          <td bgcolor="#000000" name="negro" id="12"></td>
+                          <td bgcolor="#000000" name="black" id="12"></td>
                         </tr>
                       </table>
                     </div>
 
-                    <div style="display:none" name="mezcl" id="mezcl" class="col-lg-3">
+                    <div class="col-lg-3" style="display:none" name="mezcl" id="mezcl">
                       <table class="table" style="height:148; width:50; border:solid">
                         <tr>
                           <td style="background-image:url(img/clara.jpg)" name="claro" id="17"></td>
@@ -137,8 +143,19 @@
                       </table>
                     </div>
 
+                    <div class="col-lg-1 col-lg-offset-1" id="fuck3">
+                      <label class="col-lg-1 control-label">Seleccionado:</label><br>
+                      <table class="table" style="height:25px; width:50px; border:0px">
+                        <tr>
+                          <td bgcolor="#000" id="muestraColor"></td>
+                        </tr>
+                      </table>
+                    </div>
+
                   </div>
 
+                </div>
+                <div class="form-group">
                   <div class="row-sm-5" id="tonoprenda">
                     <div class="form-group">
                     <label class="col-lg-3 control-label">Selecciona el tono de tu prenda(claro-obscuro)</label>
@@ -238,7 +255,25 @@
 
 $('#paleta').mapster('resize', 148, 0, 1000);
 $(document).on('click','td',function(e) {
-$('#tono').val(e.target.id);
+  id=e.target.id
+  $('#tono').val(id);
+  if (id==12){
+    $('#muestraColor').css({ 'background':'black'});
+  }else if (id==13){
+    $('#muestraColor').css({ 'background':'gray'});
+  }else if (id==14){
+    $('#muestraColor').css({ 'background':'white'});
+  }else if (id==15){
+    $('#muestraColor').css({ 'background-image':'url(img/obscura.jpg)'});
+  }else if (id==16){
+    $('#muestraColor').css({ 'background-image':'url(img/media.jpg)'});
+  }else if (id==17){
+    $('#muestraColor').css({ 'background-image':'url(img/clara.jpg)'});
+  }else{
+    $('#muestraColor').css({ 'background':'black'});
+  }
+
+
 });
 
 $("#fselect").on('change', function(e) {

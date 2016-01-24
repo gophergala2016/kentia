@@ -6,7 +6,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-//TipoPrenda es la estructura que define los climas para los que se usara la prenda
+//TipoPrenda es la estructura que define el tipo de prenda(Calzado,Pantalon,Camisa,Chamarra) para los que se usara la prenda
 type TipoPrenda struct {
 	ID     bson.ObjectId `bson:"_id"`
 	Nombre string
@@ -14,7 +14,7 @@ type TipoPrenda struct {
 
 const coleccionTipoPrenda = "tipo_prenda"
 
-//Registrar se encarga de registrar el clima en la BD
+//Registrar se encarga de registrar el clima en la BD.
 func (tp *TipoPrenda) Registrar() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -26,7 +26,7 @@ func (tp *TipoPrenda) Registrar() bool {
 	return true
 }
 
-//ConsultarPorID para consultar
+//BuscarPorID para consultar el tipo usando el ID.
 func (tp *TipoPrenda) BuscarPorID() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -38,7 +38,7 @@ func (tp *TipoPrenda) BuscarPorID() bool {
 	return true
 }
 
-//ConsultarTiposPrenda consulta todas los tipos de prenda
+//ConsultarTiposPrenda consulta todas los tipos de prenda.
 func ConsultarTiposPrenda() (tiposPrenda []TipoPrenda) {
 	conn := conectar()
 	defer conn.desconectar()
@@ -49,7 +49,7 @@ func ConsultarTiposPrenda() (tiposPrenda []TipoPrenda) {
 	return tiposPrenda
 }
 
-//Modificar se encarga de modificar la combinacion en la BD
+//Modificar se encarga de modificar la prenda en la BD.
 func (tp *TipoPrenda) Modificar() bool {
 	conn := conectar()
 	defer conn.desconectar()

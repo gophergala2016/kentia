@@ -8,7 +8,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-//GetSession obtiene el valor bson.ObjectId de la sesion actual*/
+//GetSession obtiene el valor bson.ObjectId de la sesion actual.
 func GetSession(session interface{}) bson.ObjectId {
 	var mySession bson.ObjectId
 	switch session.(type) {
@@ -25,7 +25,7 @@ func Index() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
 		usuarioID := GetSession(session.Get("UsuarioID"))
-		if usuarioID != bson.ObjectId(0) {
+		if usuarioID != "0" {
 			c.Redirect(http.StatusTemporaryRedirect, "/registroPrenda")
 			return
 		}

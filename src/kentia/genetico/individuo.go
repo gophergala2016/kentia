@@ -15,7 +15,7 @@ const (
 	comodin        = 4
 )
 
-//Individuo es el
+//Individuo es la estructura que define una combinación.
 type Individuo struct {
 	Genotipo []modelo.FormaColor
 	Aptitud  float64
