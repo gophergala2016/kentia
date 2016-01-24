@@ -8,7 +8,7 @@ import (
 
 //TipoPrenda es la estructura que define los climas para los que se usara la prenda
 type TipoPrenda struct {
-	ID     bson.ObjectId `bson:"_id" form:"tiposPrenda" binding:"required"`
+	ID     bson.ObjectId `bson:"_id"`
 	Nombre string
 }
 
@@ -27,7 +27,7 @@ func (tp *TipoPrenda) Registrar() bool {
 }
 
 //ConsultarPorID para consultar
-func (tp *TipoPrenda) ConsultarPorID() bool {
+func (tp *TipoPrenda) BuscarPorID() bool {
 	conn := conectar()
 	defer conn.desconectar()
 	err := conn.db.C(coleccionTipoPrenda).FindId(tp.ID).One(tp)

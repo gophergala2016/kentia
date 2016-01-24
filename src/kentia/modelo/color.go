@@ -67,7 +67,7 @@ func (c *Color) BuscarPorID() bool {
 func (c *Color) BuscarPorTono() bool {
 	conn := conectar()
 	defer conn.desconectar()
-	err := conn.db.C(coleccionColor).FindId(c.Tono).One(c)
+	err := conn.db.C(coleccionColor).Find(bson.M{"tono": c.Tono}).One(c)
 	if err != nil {
 		log.RegistrarError(err)
 		return false

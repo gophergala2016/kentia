@@ -32,7 +32,13 @@ func (p ColoresPrendas) GetColores(n int) []FormaColor {
 	}
 }
 
+//GetRandom regresa un elemento random para el elmento n
 func (p ColoresPrendas) GetRandom(n int) FormaColor {
 	disponibles := p.GetColores(n)
 	return disponibles[rand.Intn(len(disponibles))]
+}
+
+//ConsultarColoresPrendas regresa los colores de prenda que tiene el usuario
+func ConsultarColoresPrendas(usuarioID string) (cp ColoresPrendas) {
+	return cp
 }

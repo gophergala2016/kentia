@@ -72,11 +72,20 @@
         <div class="row">
           <div class="col-lg-12">
                 <fieldset>
-
+                  <div class="form-group">
+                    <label for="select" class="col-lg-3 control-label">¿Qué tipo de prenda es?</label>
+                    <div class="col-lg-9">
+                      <select class="form-control" name="tiposPrenda" id="fselect">
+                        {{range $prenda := $tiposPrenda}}
+                          <option value="{{$prenda.ID}}">{{$prenda.Nombre}}</option>
+                        {{end}}
+                      </select>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label class="col-lg-3 control-label">Selecciona el color de la prenda...</label>
-                    <div class="col-lg-9">
-                      <img class="palet" src="img/colorwhel.svg" usemap="#PaletaMap" id="paleta" alt="paleta"/>
+                    <div class="col-lg-2" id="fuck1">
+                      <img style="align:center"class="palet" src="img/colorwhel.svg" usemap="#PaletaMap" id="paleta" alt="paleta"/>
                       <map name="PaletaMap">
                         <area href="javascript:$('#tono').val('0');" shape="poly" coords="130,120,75,20,130,5" data-alt="rojo" data-title="rojo"/>
                         <area href="javascript:$('#tono').val('1');" shape="poly" coords="140,115,135,3,195,20" data-alt="naranja" data-title="naranja"/>
@@ -92,18 +101,44 @@
                         <area href="javascript:$('#tono').val('11');" shape="poly" coords="120,120,25,65,70,23" data-alt="rosa" data-title="rosarojo"/>
                       </map>
                     </div>
+                    <div class="col-sm-2" id="fuck3">
+                      <table class="table" style="height:148; width:50; border:solid">
+                        <tr>
+                          <td bgcolor="#FFFFFF" name="blanco" id="14"></td>
+                        </tr>
+                        <tr>
+                          <td bgcolor="#848484" name="gris" id="13"></td>
+                        </tr>
+                        <tr>
+                          <td bgcolor="#000000" name="negro" id="12"></td>
+                        </tr>
+                      </table>
+                    </div>
+
+                  <div style="display:none" name="mescl" id="fuck2" class="col-lg-3">
+                    <table class="table" style="height:148; width:50; border:solid">
+                      <tr>
+                        <td style="background-image:url(img/clara.jpg)" name="claro" id="17"></td>
+                      </tr>
+                      <tr>
+                        <td style="background-image:url(img/media.jpg)" name="medio" id="16"></td>
+                      </tr>
+                      <tr>
+                        <td style="background-image:url(img/obscura.jpg)" name="obscuro" id="15"></td>
+                      </tr>
+                    </table>
                   </div>
 
-                  <div class="form-group">
-                    <label for="select" class="col-lg-3 control-label">¿Qué tipo de prenda es?</label>
-                    <div class="col-lg-9">
-                      <select class="form-control" name="tiposPrenda">
-                        {{range $prenda := $tiposPrenda}}
-                          <option value="{{$prenda.ID}}">{{$prenda.Nombre}}</option>
-                        {{end}}
-                      </select>
-                    </div>
-                  </div>
+                </div>
+                <div class="form-group">
+                <div class="row-sm-5">
+                  <label class="col-lg-3 control-label">Selecciona el tono de tu prenda(claro-obscuro)</label>
+                  <div class="col-lg-3">
+                      <input type="range" name="brillo" id="brillo" min="0" max="4"/>
+                  </div >
+                </div>
+              </div>
+
 
                   <div class="form-group">
                     <label class="col-lg-3 control-label">¿En qué clima la usas?</label>
@@ -193,7 +228,23 @@
   //$('#paleta').resize(function(){alert("aa");});
 
 $('#paleta').mapster('resize', 148, 0, 1000);
+$(document).on('click','td',function(e) {
+$('#tono').val(e.target.id);
+});
+$("#fselect").on('change', function(e) {
+  var n = $("#fselect option:selected").text();
 
+  if (n =="Pantalon/Falda") {
+    $( "#fuck1" ).hide( "slow" );
+    $( "#fuck3" ).hide( "slow" );
+    $( "#fuck2" ).show(1000);
+  }
+  else {
+    $( "#fuck1" ).show(1000);
+    $( "#fuck3" ).show(1000);
+    $( "#fuck2" ).hide( "slow" );
+  }
+});
 </script>
 
         </div>

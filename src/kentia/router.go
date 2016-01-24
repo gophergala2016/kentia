@@ -23,7 +23,7 @@ func init() {
 
 	cargarTemplates()
 	servidor.Use(static.Serve("/", static.LocalFile("./public", false)))
-	servidor.StaticFile("/signinin", "./public/index.html")
+	servidor.StaticFile("/login", "./public/index.html")
 	servidor.NoRoute(func(c *gin.Context) {
 		html.ExecuteTemplate(c.Writer, "404.html", nil)
 	})
@@ -39,7 +39,7 @@ func cargarTemplates() {
 func main() {
 	servidor.GET("/registroPrenda", controlador.RegistroPrendaGET(html))
 	servidor.GET("/", controlador.Index())
-
+	servidor.POST("/login", controlador.Login(html))
 	servidor.POST("/registroUsuario", controlador.RegistroUsuario())
 	servidor.POST("/registroPrenda", controlador.RegistroPrendaPOST())
 	servidor.Run(":3000")

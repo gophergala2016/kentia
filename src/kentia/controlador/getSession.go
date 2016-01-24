@@ -13,9 +13,9 @@ func GetSession(session interface{}) bson.ObjectId {
 	var mySession bson.ObjectId
 	switch session.(type) {
 	default:
-		mySession = bson.ObjectId(0)
-	case bson.ObjectId:
-		mySession = session.(bson.ObjectId)
+		mySession = "0"
+	case string:
+		mySession = bson.ObjectIdHex(session.(string))
 	}
 	return mySession
 }
@@ -23,10 +23,12 @@ func GetSession(session interface{}) bson.ObjectId {
 //Index handler para la ruta /
 func Index() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		usuarioID := GetSession(sessions.Default(c).Get("UsuarioID"))
+		session := sessions.Default(c)
+		usuarioID := GetSession(session.Get("UsuarioID"))
 		if usuarioID != bson.ObjectId(0) {
+			c.Redirect(http.StatusTemporaryRedirect, "/registroPrenda")
 			return
 		}
-		c.Redirect(http.StatusMovedPermanently, "/signin")
+		c.Redirect(http.StatusTemporaryRedirect, "/login")
 	}
 }

@@ -75,7 +75,7 @@ func (u *Usuario) IniciarSesion() bool {
 func (u *Usuario) BuscarPorID() bool {
 	conn := conectar()
 	defer conn.desconectar()
-	err := conn.db.C(coleccionUsuario).Find(u.ID).One(u)
+	err := conn.db.C(coleccionUsuario).FindId(u.ID).One(u)
 	if err != nil {
 		log.RegistrarError(err)
 		return false

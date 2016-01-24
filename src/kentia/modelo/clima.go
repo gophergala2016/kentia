@@ -8,7 +8,7 @@ import (
 
 //Clima es la estructura que define los climas para los que se usara la prenda
 type Clima struct {
-	ID     bson.ObjectId `bson:"_id" form:"climas" binding:"required"`
+	ID     bson.ObjectId `bson:"_id"`
 	Nombre string
 }
 
