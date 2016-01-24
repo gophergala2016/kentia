@@ -25,8 +25,9 @@ func Index() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		usuarioID := GetSession(sessions.Default(c).Get("UsuarioID"))
 		if usuarioID != bson.ObjectId(0) {
+			c.Redirect(http.StatusMovedPermanently, "/registroPrenda")
 			return
 		}
-		c.Redirect(http.StatusMovedPermanently, "/signin")
+		c.Redirect(http.StatusMovedPermanently, "/login")
 	}
 }
