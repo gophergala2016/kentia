@@ -19,7 +19,7 @@ func (mapa MapaInfo) ObtenerDatosRegistroPrenda() {
 	mapa.SetInformacionMapa(
 		"climas", modelo.ConsultarClimas(),
 		"colores", modelo.ConsultarColores(),
-		"ocaciones", modelo.ConsultarOcasiones(),
+		"ocasiones", modelo.ConsultarOcasiones(),
 		"tiposPrenda", modelo.ConsultarTiposPrenda(),
 	)
 }
