@@ -7,7 +7,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-//Combinacion es la estructura que definen los colores de la prenda
+//Combinacion es la estructura que definen los colores de la prenda.
 type Combinacion struct {
 	ID       bson.ObjectId `bson:"_id"`
 	Prendas  []Prenda
@@ -17,7 +17,7 @@ type Combinacion struct {
 
 const coleccionCombinacion = "combinacion"
 
-//Registrar se encarga de registrar el color en la BD
+//Registrar se encarga de registrar la combinación en la BD.
 func (c *Combinacion) Registrar() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -29,7 +29,7 @@ func (c *Combinacion) Registrar() bool {
 	return true
 }
 
-//ConsultarPorID para consultar una combinacion por ID
+//ConsultarPorID para consultar una combinacion por ID.
 func (c *Combinacion) ConsultarPorID() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -41,7 +41,7 @@ func (c *Combinacion) ConsultarPorID() bool {
 	return false
 }
 
-//Modificar se encarga de modificar la combinacion en la BD
+//Modificar se encarga de modificar la combinacion en la BD.
 func (c *Combinacion) Modificar() bool {
 	conn := conectar()
 	defer conn.desconectar()

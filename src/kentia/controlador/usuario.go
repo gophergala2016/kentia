@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-/*Login EJEMPLO DE login. Funcion que manejara la ruta POST /login*/
+//Login es la función que se encarga de comprobar las credenciales de los usuarios.
 func Login(html *template.Template) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
@@ -28,7 +28,7 @@ func Login(html *template.Template) gin.HandlerFunc {
 	}
 }
 
-//RegistroUsuario procesa los datos recibidos del formulario
+//RegistroUsuario procesa los datos recibidos del formulario.
 func RegistroUsuario() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var u modelo.Usuario

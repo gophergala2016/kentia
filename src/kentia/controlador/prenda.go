@@ -17,6 +17,7 @@ func convertirID(s string) string {
 	return s
 }
 
+//RegistroPrendaPOST recibe el formulario y se encarga de registrarlo en la BD.
 func RegistroPrendaPOST() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		usuarioID := GetSession(sessions.Default(c).Get("UsuarioID"))

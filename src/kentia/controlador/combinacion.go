@@ -7,7 +7,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-//GenerarMejorCombinacion s
+//GenerarMejorCombinacion se encarga de buscar cada una de las prendas por color y birllo para generar una combinacion.
 func GenerarMejorCombinacion(usuarioID string) (prendas [][]modelo.Prenda) {
 	u := modelo.Usuario{ID: bson.ObjectIdHex(usuarioID)}
 	u.BuscarPorID()

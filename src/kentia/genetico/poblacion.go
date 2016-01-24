@@ -87,7 +87,7 @@ func (p poblacion) crearHijos() (hijos poblacion) {
 	return hijos
 }
 
-//Genetico genera el algoritmo genetico para combinar colores
+//Genetico genera el algoritmo génetico para combinar colores.
 func Genetico(cp modelo.ColoresPrendas) []Individuo {
 	pob := crearPoblacion(cp)
 	ordenar(&pob)
