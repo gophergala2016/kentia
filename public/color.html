@@ -1,0 +1,39 @@
+<html>
+  <head>
+
+  </head>
+  <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+  <script type="text/javascript" src="js/jquery.imagemapster.js"></script>
+<body style="background-color:blak">
+  <input id="make-small" type="button" value="Make it small">
+  <img src="img/colorwhel.svg" usemap="#PaletaMap" id="paleta" alt="paleta"/>
+  <map name="PaletaMap">
+    <area href="javascript:alert('rosarojo');" shape="poly" coords="120,120,25,65,70,23" data-alt="rosarojo" data-title="rosarojo"/>
+    <area href="javascript:alert('rojo');" shape="poly" coords="130,120,75,20,130,5" data-alt="rojo" data-title="rojp"/>
+    <area href="javascript:alert('naranja');" shape="poly" coords="140,115,135,3,195,20" data-alt="naranja" data-title="naranja"/>
+    <area href="javascript:alert('amarillo');" shape="poly" coords="150,120,200,25,240,65" data-alt="amarillo" data-title="amarillo"/>
+    <area href="javascript:alert('verde');" shape="poly" coords="150,130,260,130,245,70" data-alt="verde" data-title="verde"/>
+    <area href="javascript:alert('masverde');" shape="poly" coords="150,135,245,190,258,135" data-alt="masverde" data-title="masverde"/>
+    <area href="javascript:alert('verdeazul');" shape="poly" coords="150,145,200,240,240,195" data-alt="verdeazul" data-title="verdeazul"/>
+    <area href="javascript:alert('zul');" shape="poly" coords="140,145,135,260,195,240" data-alt="zul" data-title="azul"/>
+    <area href="javascript:alert('zulmorado');" shape="poly" coords="130,140,75,245,130,255" data-alt="zulmorado" data-title="azulmorado"/>
+    <area href="javascript:alert('morado');" shape="poly" coords="120,140,20,200,70,240" data-alt="morado" data-title="morado"/>
+    <area href="javascript:alert('moradorosa');" shape="poly" coords="120,135,20,195,5,135" data-alt="moradorosa" data-title="moradorosa"/>
+    <area href="javascript:alert('rosa');" shape="poly" coords="125,130,10,130,20,70" data-alt="rosa" data-title="rosa"/>
+  <map>
+</body>
+<script>
+$(document).ready(function ()
+{
+
+$('#paleta').mapster({
+          fillColor: 'ffffff',
+          fillOpacity: 0.1,
+          clickNavigate: true
+         });
+$('#paleta').mapster('resize', 50, 0, 1000);
+
+
+});
+</script>
+</html>
