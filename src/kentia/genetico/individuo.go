@@ -22,6 +22,7 @@ type Individuo struct {
 }
 
 func crearIndividuo(cp modelo.ColoresPrendas) (ind Individuo) {
+	ind.Genotipo = make([]int, 4)
 	for i := 0; i < 4; i++ {
 		ind.Genotipo[i] = cp.GetRandom(i)
 	}
@@ -30,7 +31,7 @@ func crearIndividuo(cp modelo.ColoresPrendas) (ind Individuo) {
 }
 
 func (ind *Individuo) mutar(cp modelo.ColoresPrendas) {
-	p := rand.Intn(5)
+	p := rand.Intn(4)
 	ind.Genotipo[p] = cp.GetRandom(p)
 }
 
@@ -38,10 +39,20 @@ func (ind *Individuo) cruza(pareja Individuo) (h1, h2 Individuo) {
 	h1.Genotipo, h2.Genotipo = make([]int, 4), make([]int, 4)
 	copy(h1.Genotipo, ind.Genotipo)
 	copy(h2.Genotipo, pareja.Genotipo)
-	for i := 0; i < 4; i++ {
-		if rand.Intn(2) == 1 {
-			h2.Genotipo[i], h1.Genotipo[i] = h1.Genotipo[i], h2.Genotipo[i]
+	numCambios := rand.Intn(3) + 1
+	posCambios := make([]int, numCambios)
+	for i := 0; i < numCambios; i++ {
+		posCambios[i] = rand.Intn(4)
+		for j := i - 1; j >= 0; j-- {
+			if posCambios[i] == posCambios[j] {
+				i--
+				break
+			}
 		}
+	}
+
+	for pos := range posCambios {
+		h2.Genotipo[pos], h1.Genotipo[pos] = h1.Genotipo[pos], h2.Genotipo[pos]
 	}
 	return h1, h2
 }
@@ -79,8 +90,8 @@ func calcularAptitud(contador map[int]int) (apt float64) {
 func (ind *Individuo) evaluar() {
 	for i := range ind.Genotipo {
 		contador := make(map[int]int)
-		if ind.Genotipo[i] > 11 {
-			for j := 0; j < 4; j++ {
+		if ind.Genotipo[i] < 12 {
+			for j := 1; j < 4; j++ {
 				sig := (i + j) % 4
 				contador[relacionarColores(ind.Genotipo[i], ind.Genotipo[sig])]++
 			}
