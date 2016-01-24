@@ -30,8 +30,7 @@ func cargarTemplates() {
 }
 
 func main() {
-	servidor.StaticFile("/RegistroUsuario", "./public/registro.html")
-
 	servidor.POST("/registroUsuario", controlador.RegistroUsuario())
+	servidor.POST("/registroPrenda", controlador.RegistroPrenda())
 	servidor.Run(":3000")
 }

@@ -20,7 +20,7 @@ func (p poblacion) Len() int {
 }
 
 func (p poblacion) Less(i, j int) bool {
-	return p[i].Aptitud < p[j].Aptitud
+	return p[i].Aptitud > p[j].Aptitud
 }
 
 func (p poblacion) Swap(i, j int) {
@@ -88,7 +88,7 @@ func (p poblacion) crearHijos() (hijos poblacion) {
 }
 
 //Genetico genera el algoritmo genetico para combinar colores
-func Genetico(cp modelo.ColoresPrendas) *Individuo {
+func Genetico(cp modelo.ColoresPrendas) []Individuo {
 	pob := crearPoblacion(cp)
 	ordenar(&pob)
 	for i := 0; i < generaciones; i++ {
@@ -97,7 +97,7 @@ func Genetico(cp modelo.ColoresPrendas) *Individuo {
 		pob = append(pob, hijos...)
 		pob = pob.elegirMejores()
 		fmt.Println("\nMejor generacion ", (i + 1))
-		fmt.Println("Genotipo: ", pob[0].Genotipo, " Costo total: ", pob[0].Aptitud)
+		fmt.Println("Genotipo: ", pob[0].Genotipo, " Aptitud total: ", pob[0].Aptitud)
 	}
-	return &pob[0]
+	return pob[:3]
 }

@@ -8,14 +8,13 @@ import (
 
 //Prenda .
 type Prenda struct {
-	ID          bson.ObjectId `bson:"_id"`
-	Luminucidad int
-	Foto        string
-	Color       Color
-	Clima       Clima
-	Tipoprenda  TipoPrenda
-	Ocasion     Ocasion
-	Usuario     Usuario
+	ID         bson.ObjectId `bson:"_id"`
+	Brillo     int           `form:"luminucidad" binding:"required"`
+	Foto       string
+	Color      Color
+	Clima      Clima
+	Tipoprenda TipoPrenda
+	Ocasion    Ocasion
 }
 
 const coleccionPrenda = "prenda"
