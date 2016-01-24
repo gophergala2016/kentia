@@ -32,8 +32,8 @@ func cargarTemplates() {
 }
 
 func main() {
-	servidor.GET("/registroPrenda", controlador.RegistroPrendaUsuario(html))
+	servidor.GET("/registroPrenda", controlador.RegistroPrendaGET(html))
 	servidor.POST("/registroUsuario", controlador.RegistroUsuario())
-	servidor.POST("/registroPrenda", controlador.RegistroPrenda())
+	servidor.POST("/registroPrenda", controlador.RegistroPrendaPOST())
 	servidor.Run(":3000")
 }

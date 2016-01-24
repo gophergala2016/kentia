@@ -2,17 +2,20 @@ package controlador
 
 import (
 	"html/template"
+	"kentia/modelo"
 
 	"github.com/gin-gonic/gin"
 )
 
-func RegistroPrenda() gin.HandlerFunc {
+func RegistroPrendaPOST() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		prenda := modelo.Prenda{}
+		c.Bind(prenda)
 
 	}
 }
 
-func RegistroPrendaUsuario(html *template.Template) gin.HandlerFunc {
+func RegistroPrendaGET(html *template.Template) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		mapa := MapaInfo{}
 		mapa.ObtenerDatosRegistroPrenda()
