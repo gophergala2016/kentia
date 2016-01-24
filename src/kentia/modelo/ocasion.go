@@ -12,7 +12,7 @@ type Ocasion struct {
 	Nombre string
 }
 
-const coleccionOcasion = "ocacion"
+const coleccionOcasion = "ocasion"
 
 //Registrar un nuevo tipo de ocacion en la bd
 func (c *Ocasion) Registrar() bool {
