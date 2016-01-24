@@ -6,15 +6,15 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-//Clima es la estructura que define los climas para los que se usara la prenda
+//Clima es la estructura que define los climas para los que se usará la prenda.
 type Clima struct {
-	ID     bson.ObjectId `bson:"_id" form:"climas" binding:"required"`
+	ID     bson.ObjectId `bson:"_id"`
 	Nombre string
 }
 
 const coleccionClima = "clima"
 
-//Registrar se encarga de registrar el clima en la BD
+//Registrar se encarga de registrar el clima en la BD.
 func (c *Clima) Registrar() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -27,7 +27,7 @@ func (c *Clima) Registrar() bool {
 	return true
 }
 
-//Modificar
+//Modificar actualiza los datos del clima.
 func (c *Clima) Modificar() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -50,7 +50,7 @@ func ConsultarClimas() (climas []Clima) {
 	return climas
 }
 
-//BuscarPorID busca en la BD un cllima que coincida con el ID dado
+//BuscarPorID busca en la BD un clima que coincida con el ID dado.
 func (c *Clima) BuscarPorID() bool {
 	conn := conectar()
 	defer conn.desconectar()

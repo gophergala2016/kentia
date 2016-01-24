@@ -7,15 +7,15 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-//Ocasion estructura para conocer la ocacion en quese usara la prenda
+//Ocasion estructura para conocer la ocasion en que se usará la prenda.
 type Ocasion struct {
-	ID     bson.ObjectId `bson:"_id" form:"ocasiones" binding:"required"`
+	ID     bson.ObjectId `bson:"_id"`
 	Nombre string
 }
 
 const coleccionOcasion = "ocasion"
 
-//Registrar un nuevo tipo de ocacion en la bd
+//Registrar un nuevo tipo de ocacion en la bd.
 func (c *Ocasion) Registrar() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -27,7 +27,7 @@ func (c *Ocasion) Registrar() bool {
 	return true
 }
 
-//Modificar Modificar una prendacoleccionColor
+//Modificar actualizara la ocasión.
 func (c *Ocasion) Modificar() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -39,7 +39,7 @@ func (c *Ocasion) Modificar() bool {
 	return true
 }
 
-//ConsultarOcasiones regresa un catálogo de colores
+//ConsultarOcasiones regresa un catálogo de ocasiones.
 func ConsultarOcasiones() (ocasiones []Ocasion) {
 	conn := conectar()
 	defer conn.desconectar()
@@ -52,7 +52,7 @@ func ConsultarOcasiones() (ocasiones []Ocasion) {
 	return ocasiones
 }
 
-//BuscarPorID busca en la BD un cllima que coincida con el ID dado
+//BuscarPorID busca en la BD un ocasion que coincida con el ID dado.
 func (c *Ocasion) BuscarPorID() bool {
 	conn := conectar()
 	defer conn.desconectar()

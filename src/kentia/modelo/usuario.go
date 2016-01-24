@@ -6,7 +6,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-//Usuario define los valores que identifican a un usario del sistema
+//Usuario define los valores que identifican a un usuario del sistema.
 type Usuario struct {
 	ID            bson.ObjectId `bson:"_id"`
 	Nombre        string        `form:"nombre"`
@@ -19,7 +19,7 @@ type Usuario struct {
 
 const coleccionUsuario = "usuario"
 
-//Registrar registra un usuario en la DB
+//Registrar registra un usuario en la DB.
 func (u *Usuario) Registrar() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -32,7 +32,7 @@ func (u *Usuario) Registrar() bool {
 	return true
 }
 
-//Modificar modifica un usuario en la DB
+//Modificar modifica un usuario en la DB.
 func (u *Usuario) Modificar() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -44,7 +44,7 @@ func (u *Usuario) Modificar() bool {
 	return true
 }
 
-//ConsultarUsuarios regresa el catálogo de usuarios
+//ConsultarUsuarios regresa el catálogo de usuarios.
 func ConsultarUsuarios() (usuarios []Usuario) {
 	conn := conectar()
 	defer conn.desconectar()
@@ -56,7 +56,7 @@ func ConsultarUsuarios() (usuarios []Usuario) {
 	return usuarios
 }
 
-//IniciarSesion comprueba las credenciales y autoriza una sesion
+//IniciarSesion comprueba las credenciales y autoriza una sesion.
 func (u *Usuario) IniciarSesion() bool {
 	conn := conectar()
 	defer conn.desconectar()
@@ -71,11 +71,11 @@ func (u *Usuario) IniciarSesion() bool {
 	return true
 }
 
-//BuscarPorID busca un usuario en la DB por ID
+//BuscarPorID busca un usuario en la DB por ID.
 func (u *Usuario) BuscarPorID() bool {
 	conn := conectar()
 	defer conn.desconectar()
-	err := conn.db.C(coleccionUsuario).Find(u.ID).One(u)
+	err := conn.db.C(coleccionUsuario).FindId(u.ID).One(u)
 	if err != nil {
 		log.RegistrarError(err)
 		return false
