@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.imagemapster.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>Combinacion</title>
+    <link href="bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .thumb {
+        width: 65%;
+        border: 1px solid #000;
+        margin: 10px 5px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    {{$prendas := index . "mejores"}}
+    <div class="container">
+      <div class="bs-docs-section">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 id="forms">Prenda</h1>
+          </div>
+        </div>
+        <div class="well bs-component">
+                <div class="row">
+                  <div class="col-lg-12">
+                     <legend>Combinaciones basadas en tu armario<br><br></legend>
+                  </div>
+                </div>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner" role="listbox">
+                  {{range $i, $combinacion:=$prendas}}
+                  {{if eq $i 0}}
+                  <div class="row item active" name="comb{{$i}}">
+                  {{else}}
+                  <div class="row item" name="comb{{$i}}">
+                  {{end}}
+                  {{$calzado := index $combinacion 0}}
+                  {{$jeans := index $combinacion 1}}
+                  {{$playera := index $combinacion 2}}
+                  {{$chamarra := index $combinacion }}
+                      <div class="col-lg-5 col-lg-offset-4 col-height">
+                        <div class="row-heigth">
+                          <div class="col-xs-5 col-heigth">
+                            <img src="{{$chamarra.Foto}}" class="img-responsive "/>
+                          </div>
+                          <div class="col-xs-5 col-heigth">
+                            <img src="{{$playera.Foto}}" class="img-responsive "/>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row-height">
+                          <div class="col-xs-5">
+
+                          </div>
+                          <div class="col-xs-5 col-heigth">
+                            <img src="{{$jeans.Foto}}" class="img-responsive"/>
+                          </div>
+                        </div>
+                        <div class="row-heigth">
+                          <div class="col-xs-5 col-heigth">
+
+                          </div>
+                          <div class="col-xs-5 col-heigth">
+                            <img src="{{$calzado.Foto}}" class="img-responsive"/>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  {{end}}
+<!--
+<div class="row item" name="comb2">
+                      <div class="col-lg-5 col-lg-offset-4 col-height">
+                        <div class="row-heigth">
+                          <div class="col-xs-5 col-heigth" style="img/chamarra.jpg">
+                            <img src="img/teni.jpg" class="img-responsive "/>
+                          </div>
+                          <div class="col-xs-5 col-heigth">
+                            <img src="img/playera.jpg" class="img-responsive "/>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row-height">
+                          <div class="col-xs-5">
+
+                          </div>
+                          <div class="col-xs-5 col-heigth">
+                            <img src="img/pantalon.jpg" class="img-responsive"/>
+                          </div>
+                        </div>
+                        <div class="row-heigth">
+                          <div class="col-xs-5 col-heigth">
+
+                          </div>
+                          <div class="col-xs-5 col-heigth">
+                            <img src="img/teni.jpg" class="img-responsive"/>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="row item" name="comb3">
+                      <div class="col-lg-5 col-lg-offset-4 col-height">
+                        <div class="row-heigth">
+                          <div class="col-xs-5 col-heigth" style="img/chamarra.jpg">
+                            <img src="img/chamarra.jpg" class="img-responsive "/>
+                          </div>
+                          <div class="col-xs-5 col-heigth">
+                            <img src="img/pantalon.jpg" class="img-responsive "/>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row-height">
+                          <div class="col-xs-5">
+
+                          </div>
+                          <div class="col-xs-5 col-heigth">
+                            <img src="img/playera.jpg" class="img-responsive"/>
+                          </div>
+                        </div>
+                        <div class="row-heigth">
+                          <div class="col-xs-5 col-heigth">
+
+                          </div>
+                          <div class="col-xs-5 col-heigth">
+                            <img src="img/teni.jpg" class="img-responsive"/>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    --><a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
