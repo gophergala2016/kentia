@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.imagemapster.js"></script>
+
     <title>Registro de Prenda</title>
 
     <style>
@@ -16,6 +19,10 @@
       #drop_zone{
         border: #000 1px dashed;
         width: 95%;
+        height: 200px;
+      }
+      .palet{
+        width: 70%;
         height: 200px;
       }
     </style>
@@ -65,6 +72,28 @@
         <div class="row">
           <div class="col-lg-12">
                 <fieldset>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Selecciona el color de la prenda...</label>
+                    <div class="col-lg-9">
+                      <img class="palet" src="img/colorwhel.svg" usemap="#PaletaMap" id="paleta" alt="paleta"/>
+                      <map name="PaletaMap">
+                        <area href="javascript:$('#tono').val('0');" shape="poly" coords="130,120,75,20,130,5" data-alt="rojo" data-title="rojo"/>
+                        <area href="javascript:$('#tono').val('1');" shape="poly" coords="140,115,135,3,195,20" data-alt="naranja" data-title="naranja"/>
+                        <area href="javascript:$('#tono').val('2');" shape="poly" coords="150,120,200,25,240,65" data-alt="amarillo" data-title="amarillo"/>
+                        <area href="javascript:$('#tono').val('3');" shape="poly" coords="150,130,260,130,245,70" data-alt="verdeamarillo" data-title="verde"/>
+                        <area href="javascript:$('#tono').val('4');" shape="poly" coords="150,135,245,190,258,135" data-alt="verde" data-title="masverde"/>
+                        <area href="javascript:$('#tono').val('5);" shape="poly" coords="150,145,200,240,240,195" data-alt="verdeazul" data-title="verdeazul"/>
+                        <area href="javascript:$('#tono').val('6');" shape="poly" coords="140,145,135,260,195,240" data-alt="azul" data-title="azul"/>
+                        <area href="javascript:$('#tono').val('7');" shape="poly" coords="130,140,75,245,130,255" data-alt="azulvioleta" data-title="azulmorado"/>
+                        <area href="javascript:$('#tono').val('8');" shape="poly" coords="120,140,20,200,70,240" data-alt="vlioleta" data-title="morado"/>
+                        <area href="javascript:$('#tono').val('9');" shape="poly" coords="120,135,20,195,5,135" data-alt="moradomalva" data-title="moradorosa"/>
+                        <area href="javascript:$('#tono').val('10');" shape="poly" coords="125,130,10,130,20,70" data-alt="moradorosa" data-title="rosa"/>
+                        <area href="javascript:$('#tono').val('11');" shape="poly" coords="120,120,25,65,70,23" data-alt="rosa" data-title="rosarojo"/>
+                      </map>
+                    </div>
+                  </div>
+
                   <div class="form-group">
                     <label for="select" class="col-lg-3 control-label">¿Qué tipo de prenda es?</label>
                     <div class="col-lg-9">
@@ -76,12 +105,6 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label class="col-lg-3 control-label">Selecciona el color de la prenda...</label>
-                    <div class="col-lg-9">
-
-                    </div>
-                  </div>
                   <div class="form-group">
                     <label class="col-lg-3 control-label">¿En qué clima la usas?</label>
                     <div class="col-lg-9">
@@ -112,12 +135,12 @@
                       <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                   </div>
-                  <input type="hidden" name="tono" value="">
+                  <input type="hidden" name="tono" value="12" id="tono">
                 </fieldset>
               </form>
             </div>
           </div>
-          
+
             <script>
         function archivo(evt) {
             var fotos = evt.target.files; //FileList object
@@ -156,10 +179,21 @@
     evt.preventDefault();
     evt.dataTransfer.dropEffect = 'copy';
   }
+
   // Setup the dnd listeners.
   var dropZone = document.getElementById('drop_zone');
   dropZone.addEventListener('dragover', handleDragOver, false);
   dropZone.addEventListener('drop', handleFileSelect, false);
+
+  $('#paleta').mapster({
+            fillColor: 'ffffff',
+            fillOpacity: 0.1,
+            clickNavigate: true
+           });
+  //$('#paleta').resize(function(){alert("aa");});
+
+$('#paleta').mapster('resize', 148, 0, 1000);
+
 </script>
 
         </div>
