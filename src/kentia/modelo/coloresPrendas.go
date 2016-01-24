@@ -4,14 +4,20 @@ import "math/rand"
 
 //ColoresPrendas indica los colores de las prendas disponibles
 type ColoresPrendas struct {
-	Calzado  []int
-	Pantalon []int
-	Playera  []int
-	Chamarra []int
+	Calzado  []FormaColor
+	Pantalon []FormaColor
+	Playera  []FormaColor
+	Chamarra []FormaColor
+}
+
+//FormaColor informacion básica de un color para una prenda
+type FormaColor struct {
+	Tono   int
+	Brillo int
 }
 
 //GetColores regresa los colores de una prenda en específico
-func (p ColoresPrendas) GetColores(n int) []int {
+func (p ColoresPrendas) GetColores(n int) []FormaColor {
 	switch n {
 	case 0:
 		return p.Calzado
@@ -26,7 +32,7 @@ func (p ColoresPrendas) GetColores(n int) []int {
 	}
 }
 
-func (p ColoresPrendas) GetRandom(n int) int {
+func (p ColoresPrendas) GetRandom(n int) FormaColor {
 	disponibles := p.GetColores(n)
 	return disponibles[rand.Intn(len(disponibles))]
 }

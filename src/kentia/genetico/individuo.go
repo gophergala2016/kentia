@@ -17,12 +17,12 @@ const (
 
 //Individuo es el
 type Individuo struct {
-	Genotipo []int
+	Genotipo []modelo.FormaColor
 	Aptitud  float64
 }
 
 func crearIndividuo(cp modelo.ColoresPrendas) (ind Individuo) {
-	ind.Genotipo = make([]int, 4)
+	ind.Genotipo = make([]modelo.FormaColor, 4)
 	for i := 0; i < 4; i++ {
 		ind.Genotipo[i] = cp.GetRandom(i)
 	}
@@ -36,7 +36,7 @@ func (ind *Individuo) mutar(cp modelo.ColoresPrendas) {
 }
 
 func (ind *Individuo) cruza(pareja Individuo) (h1, h2 Individuo) {
-	h1.Genotipo, h2.Genotipo = make([]int, 4), make([]int, 4)
+	h1.Genotipo, h2.Genotipo = make([]modelo.FormaColor, 4), make([]modelo.FormaColor, 4)
 	copy(h1.Genotipo, ind.Genotipo)
 	copy(h2.Genotipo, pareja.Genotipo)
 	numCambios := rand.Intn(3) + 1
@@ -57,17 +57,17 @@ func (ind *Individuo) cruza(pareja Individuo) (h1, h2 Individuo) {
 	return h1, h2
 }
 
-func relacionarColores(c1, c2 int) int {
-	if c1 == c2 {
+func relacionarTOnos(t1, t2 int) int {
+	if t1 == t2 {
 		return monocromatico
 	}
-	if (c1+1)%12 == c2 || (c1-1)%12 == c2 {
+	if (t1+1)%12 == t2 || (t1-1)%12 == t2 {
 		return analogo
 	}
-	if (c1+6)%12 == c2 {
+	if (t1+6)%12 == t2 {
 		return complementario
 	}
-	if c2 > 11 {
+	if t2 > 11 {
 		return comodin
 	}
 	return sinRelacion
@@ -90,10 +90,10 @@ func calcularAptitud(contador map[int]int) (apt float64) {
 func (ind *Individuo) evaluar() {
 	for i := range ind.Genotipo {
 		contador := make(map[int]int)
-		if ind.Genotipo[i] < 12 {
+		if ind.Genotipo[i].Tono < 12 {
 			for j := 1; j < 4; j++ {
 				sig := (i + j) % 4
-				contador[relacionarColores(ind.Genotipo[i], ind.Genotipo[sig])]++
+				contador[relacionarTOnos(ind.Genotipo[i].Tono, ind.Genotipo[sig].Tono)]++
 			}
 		}
 		nuevaAptitud := calcularAptitud(contador)
