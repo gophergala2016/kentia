@@ -13,7 +13,7 @@ type Prenda struct {
 	Foto       string
 	Color      Color
 	Clima      Clima
-	Tipoprenda TipoPrenda
+	TipoPrenda TipoPrenda
 	Ocasion    Ocasion
 }
 

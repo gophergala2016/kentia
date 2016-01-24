@@ -62,3 +62,15 @@ func (c *Color) BuscarPorID() bool {
 	}
 	return true
 }
+
+//BuscarPorTono busca en la BD un color que coincida con el ID dado
+func (c *Color) BuscarPorTono() bool {
+	conn := conectar()
+	defer conn.desconectar()
+	err := conn.db.C(coleccionColor).FindId(c.Tono).One(c)
+	if err != nil {
+		log.RegistrarError(err)
+		return false
+	}
+	return true
+}

@@ -2,9 +2,75 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
     <title>Kentia | Inicio</title>
   </head>
-  <body>
-    <h1>Hola mundo Kentia</h1>
+  <body><br><br>
+    <div class="container">
+      <div class="bs-docs-section">
+        <div class="row">
+          <div class="col-lg-6">
+            <legend>Bienvenido a Kentia</legend>
+            <h5>Te ayudaremos a seleccionar los conjuntos de ropa de tu agrado para que no tengas que preocuparte por eso nunca más.</h5>
+            <br><br><br><br><br><center>Insertar imagen mamona</center>
+          </div>
+          <div class="col-lg-4 col-lg-offset-1">
+            <div class="well bs-component">
+              <fieldset>
+                <form class="form-horizontal" method="post" action="login" name="formInicio">
+                  <div class="form-group">
+                    <div class="col-lg-11">
+                      <input type="email" class="form-control" name="correo" id="inputEmail" placeholder="Email"><br>
+                      <input type="password" class="form-control" name="pass" id="inputPassword" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Inicia Sesión</button>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+
+            <div class="well bs-component">
+              <fieldset>
+                <h5>¿Eres nuevo en Kentia? <b>Regístrate.</b></h5><hr>
+                <form class="form-horizontal" method="post" action="registroUsuario" name="formRegistro">
+                  <div class="form-group">
+                    <div class="col-lg-11">
+                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"/></br>
+                      <label class="col-lg-1 control-label">Género</label>
+                      <div class="col-lg-11">
+                        <div class="radio">
+                          <div class="col-lg-2">
+                            <label>
+                              <input type="radio" name="genero" value="" checked>Hombre
+                            </label>
+                          </div>
+                          <div class="col-lg-2 col-lg-offset-3">
+                            <label>
+                              <input type="radio" name="genero" value="">Mujer
+                            </label>
+                          </div>
+                        </div>
+                        <br>
+                      </div>
+                      <input type="email" class="form-control" name="correo" id="inputEmail" placeholder="Email"><br>
+                      <input type="password" class="form-control" name="pass" id="inputPassword" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Regístrate</button>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

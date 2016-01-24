@@ -20,7 +20,10 @@ func RegistroPrendaPOST() gin.HandlerFunc {
 				u := modelo.Usuario{ID: usuarioID}
 				if u.BuscarPorID() {
 					p.ID = bson.NewObjectId()
-					p.Color.ID = bson.NewObjectId()
+					p.Clima.BuscarPorID()
+					p.Color.BuscarPorTono()
+					p.Ocasion.BuscarPorID()
+					p.TipoPrenda.BuscarPorID()
 					u.Prendas = append(u.Prendas, p)
 					if u.Modificar() {
 						//BIEN

@@ -1,8 +1,9 @@
 package controlador
 
 import (
+	"html/template"
 	"kentia/modelo"
-	"text/template"
+	"net/http"
 
 	"gopkg.in/mgo.v2/bson"
 
@@ -23,6 +24,6 @@ func Login(html *template.Template) gin.HandlerFunc {
 		}
 		session.Set("UsuarioID", usuario.ID)
 		session.Save()
-		c.Redirect(302, "/")
+		c.Redirect(http.StatusTemporaryRedirect, "/")
 	}
 }
