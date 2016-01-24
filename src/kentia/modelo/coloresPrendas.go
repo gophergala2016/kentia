@@ -39,6 +39,19 @@ func (p ColoresPrendas) GetRandom(n int) FormaColor {
 }
 
 //ConsultarColoresPrendas regresa los colores de prenda que tiene el usuario
-func ConsultarColoresPrendas(usuarioID string) (cp ColoresPrendas) {
+func (u *Usuario) ConsultarColoresPrendas() (cp ColoresPrendas) {
+	for _, prenda := range u.Prendas {
+		fc := FormaColor{Tono: prenda.Color.Tono, Brillo: prenda.Brillo}
+		switch prenda.TipoPrenda.Nombre {
+		case "Calzado":
+			cp.Calzado = append(cp.Calzado, fc)
+		case "Pantalon/Falda":
+			cp.Pantalon = append(cp.Pantalon, fc)
+		case "Playera":
+			cp.Playera = append(cp.Playera, fc)
+		case "Chamarra":
+			cp.Chamarra = append(cp.Chamarra, fc)
+		}
+	}
 	return cp
 }

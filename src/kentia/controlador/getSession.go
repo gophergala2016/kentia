@@ -25,7 +25,7 @@ func Index() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
 		usuarioID := GetSession(session.Get("UsuarioID"))
-		if usuarioID != bson.ObjectId(0) {
+		if usuarioID != "0" {
 			c.Redirect(http.StatusTemporaryRedirect, "/registroPrenda")
 			return
 		}

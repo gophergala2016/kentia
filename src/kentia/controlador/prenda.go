@@ -20,7 +20,7 @@ func convertirID(s string) string {
 func RegistroPrendaPOST() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		usuarioID := GetSession(sessions.Default(c).Get("UsuarioID"))
-		if usuarioID != bson.ObjectId(0) {
+		if usuarioID != "0" {
 			var p modelo.Prenda
 			if c.Bind(&p) == nil {
 				u := modelo.Usuario{ID: usuarioID}
