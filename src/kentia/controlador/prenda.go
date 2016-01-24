@@ -3,7 +3,10 @@ package controlador
 import (
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"kentia/modelo"
+	"net/http"
+	"os"
 	"strings"
 
 	"gopkg.in/mgo.v2/bson"
@@ -15,6 +18,33 @@ import (
 func convertirID(s string) string {
 	s = s[strings.Index(s, "\"")+1 : strings.LastIndex(s, "\"")]
 	return s
+}
+
+func guadarImagen(c *gin.Context, p modelo.Prenda) {
+	file, _, err := c.Request.FormFile("foto")
+	if err != nil {
+		c.String(http.StatusSeeOther, "Sin imagen")
+		return
+	}
+	defer file.Close()
+
+	data, _ := ioutil.ReadAll(file)
+
+	ruta := "/img/foto" + p.ID.Hex() + ".png"
+	p.Foto = "public" + ruta
+
+	out, err := os.Create(p.Foto)
+	if err != nil {
+		c.String(http.StatusTemporaryRedirect, err.Error())
+		return
+	}
+
+	_, err = out.Write(data)
+	if err != nil {
+		c.String(http.StatusTemporaryRedirect, err.Error())
+		return
+	}
+	defer out.Close()
 }
 
 //RegistroPrendaPOST recibe el formulario y se encarga de registrarlo en la BD.
@@ -37,9 +67,9 @@ func RegistroPrendaPOST() gin.HandlerFunc {
 
 					p.Ocasion.ID = bson.ObjectIdHex(convertirID(c.PostForm("ocasion")))
 					p.Ocasion.BuscarPorID()
-					fmt.Println(p)
 
-					fmt.Println(p)
+					guadarImagen(c, p)
+
 					u.Prendas = append(u.Prendas, p)
 					if u.Modificar() {
 						//BIEN
