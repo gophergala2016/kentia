@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Registro de Prenda</title>
+
+    <style>
+      .thumb {
+        width: 65%;
+        border: 1px solid #000;
+        margin: 10px 5px 0 0;
+      }
+      #drop_zone{
+        border: #000 1px dashed;
+        width: 95%;
+        height: 200px;
+      }
+    </style>
+
+    <link href="bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    {{$climas := index . "climas"}}
+    {{$colores := index . "colores"}}
+    {{$ocasiones := index . "ocasiones"}}
+    {{$tiposPrenda := index . "tiposPrenda"}}
+
+    <div class="container">
+      <div class="bs-docs-section">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 id="forms">Prenda</h1>
+          </div>
+        </div>
+<div class="well bs-component">
+  <form class="form-horizontal" method="post" action="registroPrenda" name="formaRegistro">
+        <div class="row">
+          <div class="col-lg-12">
+             <legend>En este apartado podrá agregar y clasificar su ropa para que podamos darte sugerencias más adelante.<br><br></legend>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-5 col-lg-offset-1">
+            <div class="row">
+                <label for="fotos" class="col-lg-6 control-label">Selecciona la foto de la prenda</label>
+                <br><br>
+                <input type="file" id="fotos" name="fotos[]" accept="image/*"/>
+            </div>
+            <br>
+            <div class="row">
+              <div id="drop_zone"><br /><center>Arrastra y suelta tu foto aqui</center></div><br>
+            </div>
+          </div>
+          <div class="col-lg-5 col-lg-offset-1">
+              <output id="list"></output>
+              <br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+                <fieldset>
+                  <div class="form-group">
+                    <label for="select" class="col-lg-3 control-label">¿Qué tipo de prenda es?</label>
+                    <div class="col-lg-9">
+                      <select class="form-control" name="tiposPrenda">
+                        {{range $prenda := $tiposPrenda}}
+                          <option value="{{$clima.ID}}">{{$prenda.Nombre}}</option>
+                        {{end}}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Selecciona el color de la prenda...</label>
+                    <div class="col-lg-9">
+
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">¿En qué clima la usas?</label>
+                    <div class="col-lg-9">
+                       {{range $clima := $climas}}
+                        <div class="radio">
+                        <label>
+                          <input type="radio" name="climas" value="{{$clima.ID}}" checked="">
+                          {{$clima.Nombre}}
+                        </label>
+                      </div>
+                       {{end}}
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="select" class="col-lg-3 control-label">¿Para qué ocasiones la usas?</label>
+                    <div class="col-lg-9">
+                      <select class="form-control" name="ocasiones">
+                        {{range $ocasion := $ocasiones}}
+                          <option value="{{$clima.ID}}">{{$ocasion.Nombre}}</option>
+                        {{end}}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-1 col-lg-offset-6">
+                      <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                  </div>
+                  <input type="hidden" name="tono" value="">
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          
+            <script>
+        function archivo(evt) {
+            var fotos = evt.target.files; //FileList object
+            for (var i = 0, f; f = fotos[i]; i++) { //Imagen de file
+              var reader = new FileReader();
+              reader.onload = (function(theFile) {
+                  return function(e) {
+                  document.getElementById("list").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');                  };
+              })(f);
+              reader.readAsDataURL(f);
+            }
+        }
+        document.getElementById('fotos').addEventListener('change', archivo, false);
+      </script>
+
+<script>
+  function handleFileSelect(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+    for (var i = 0, f; f = files[i]; i++) {
+      var reader = new FileReader();
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          document.getElementById("list").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+        };
+      })(f);
+      reader.readAsDataURL(f);
+    }
+  }
+
+  function handleDragOver(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy';
+  }
+  // Setup the dnd listeners.
+  var dropZone = document.getElementById('drop_zone');
+  dropZone.addEventListener('dragover', handleDragOver, false);
+  dropZone.addEventListener('drop', handleFileSelect, false);
+</script>
+
+        </div>
+      </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
