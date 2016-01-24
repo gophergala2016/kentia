@@ -9,7 +9,7 @@ import (
 //Prenda .
 type Prenda struct {
 	ID         bson.ObjectId `bson:"_id"`
-	Brillo     int           `form:"luminucidad"`
+	Brillo     int           `form:"brillo"`
 	Foto       string
 	Color      Color
 	Clima      Clima

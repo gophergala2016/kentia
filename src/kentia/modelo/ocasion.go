@@ -9,7 +9,7 @@ import (
 
 //Ocasion estructura para conocer la ocacion en quese usara la prenda
 type Ocasion struct {
-	ID     bson.ObjectId `bson:"_id" form:"ocasiones" binding:"required"`
+	ID     bson.ObjectId `bson:"_id"`
 	Nombre string
 }
 
