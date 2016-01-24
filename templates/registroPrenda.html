@@ -74,17 +74,24 @@
                 <fieldset>
                   <div class="form-group">
                     <label for="select" class="col-lg-3 control-label">¿Qué tipo de prenda es?</label>
-                    <div class="col-lg-9">
+                    <div class="col-lg-7">
                       <select class="form-control" name="tiposPrenda" id="fselect">
                         {{range $prenda := $tiposPrenda}}
                           <option value="{{$prenda.ID}}">{{$prenda.Nombre}}</option>
                         {{end}}
                       </select>
                     </div>
+                    <div class="col-lg-2" id="check" style="display:none">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="checkmez" id="checkmez">¿Es de mezclilla?
+                        </label>
+                      </div>
+                    </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-lg-3 control-label">Selecciona el color de la prenda...</label>
-                    <div class="col-lg-2" id="fuck1">
+                    <label class="col-lg-3 control-label">Selecciona el color de la prenda</label>
+                    <div class="col-lg-2" id="rueda" name="rueda">
                       <img style="align:center"class="palet" src="img/colorwhel.svg" usemap="#PaletaMap" id="paleta" alt="paleta"/>
                       <map name="PaletaMap">
                         <area href="javascript:$('#tono').val('0');" shape="poly" coords="130,120,75,20,130,5" data-alt="rojo" data-title="rojo"/>
@@ -101,7 +108,8 @@
                         <area href="javascript:$('#tono').val('11');" shape="poly" coords="120,120,25,65,70,23" data-alt="rosa" data-title="rosarojo"/>
                       </map>
                     </div>
-                    <div class="col-sm-2" id="fuck3">
+
+                    <div class="col-sm-2" id="monocro" name="monocro">
                       <table class="table" style="height:148; width:50; border:solid">
                         <tr>
                           <td bgcolor="#FFFFFF" name="blanco" id="14"></td>
@@ -115,30 +123,31 @@
                       </table>
                     </div>
 
-                  <div style="display:none" name="mescl" id="fuck2" class="col-lg-3">
-                    <table class="table" style="height:148; width:50; border:solid">
-                      <tr>
-                        <td style="background-image:url(img/clara.jpg)" name="claro" id="17"></td>
-                      </tr>
-                      <tr>
-                        <td style="background-image:url(img/media.jpg)" name="medio" id="16"></td>
-                      </tr>
-                      <tr>
-                        <td style="background-image:url(img/obscura.jpg)" name="obscuro" id="15"></td>
-                      </tr>
-                    </table>
+                    <div style="display:none" name="mezcl" id="mezcl" class="col-lg-3">
+                      <table class="table" style="height:148; width:50; border:solid">
+                        <tr>
+                          <td style="background-image:url(img/clara.jpg)" name="claro" id="17"></td>
+                        </tr>
+                        <tr>
+                          <td style="background-image:url(img/media.jpg)" name="medio" id="16"></td>
+                        </tr>
+                        <tr>
+                          <td style="background-image:url(img/obscura.jpg)" name="obscuro" id="15"></td>
+                        </tr>
+                      </table>
+                    </div>
+
                   </div>
 
-                </div>
-                <div class="form-group">
-                <div class="row-sm-5">
-                  <label class="col-lg-3 control-label">Selecciona el tono de tu prenda(claro-obscuro)</label>
-                  <div class="col-lg-3">
-                      <input type="range" name="brillo" id="brillo" min="0" max="4"/>
-                  </div >
-                </div>
-              </div>
-
+                  <div class="row-sm-5" id="tonoprenda">
+                    <div class="form-group">
+                    <label class="col-lg-3 control-label">Selecciona el tono de tu prenda(claro-obscuro)</label>
+                      <div class="col-lg-3">
+                          <input oninput="this.form.amountInput.value=this.value" type="range" name="brillo" id="brillo" min="0" max="4"/>
+                          <input type="number" name="amountInput" disabled maxlength="1"/>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="form-group">
                     <label class="col-lg-3 control-label">¿En qué clima la usas?</label>
@@ -231,20 +240,38 @@ $('#paleta').mapster('resize', 148, 0, 1000);
 $(document).on('click','td',function(e) {
 $('#tono').val(e.target.id);
 });
+
 $("#fselect").on('change', function(e) {
   var n = $("#fselect option:selected").text();
 
   if (n =="Pantalon/Falda") {
-    $( "#fuck1" ).hide( "slow" );
-    $( "#fuck3" ).hide( "slow" );
-    $( "#fuck2" ).show(1000);
+    $( "#check" ).show(700);
   }
   else {
-    $( "#fuck1" ).show(1000);
-    $( "#fuck3" ).show(1000);
-    $( "#fuck2" ).hide( "slow" );
+    $('#checkmez').prop('checked', false);
+    $( "#rueda" ).show(1000);
+    $( "#monocro" ).show(1000);
+    $( "#tonoprenda" ).show(1000);
+    $( "#mezcl" ).hide( "slow" );
+    $( "#check" ).hide( "fast" );
   }
 });
+
+$("#checkmez").on("click", function() {
+     if($(this).is(":checked")) {
+       $( "#rueda" ).hide( "slow" );
+       $( "#monocro" ).hide( "slow" );
+       $( "#tonoprenda" ).hide( "slow" );
+       $( "#mezcl" ).show(1000);
+     }
+     else{
+       $( "#rueda" ).show(1000);
+       $( "#monocro" ).show(1000);
+       $( "#tonoprenda" ).show(1000);
+       $( "#mezcl" ).hide( "slow" );
+     }
+  });
+
 </script>
 
         </div>
