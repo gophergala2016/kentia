@@ -57,7 +57,7 @@ func (ind *Individuo) cruza(pareja Individuo) (h1, h2 Individuo) {
 	return h1, h2
 }
 
-func relacionarTOnos(t1, t2 int) int {
+func relacionarTonos(t1, t2 int) int {
 	if t1 == t2 {
 		return monocromatico
 	}
@@ -73,7 +73,14 @@ func relacionarTOnos(t1, t2 int) int {
 	return sinRelacion
 }
 
-func calcularAptitud(contador map[int]int) (apt float64) {
+func relacionarBrillos(b1, b2 int) bool {
+	if b1 == b2 || b1 == (b2+1)%5 || b1 == (b2-1)%5 {
+		return true
+	}
+	return false
+}
+
+func calcularAptitud(contador map[int]int, contadorBrillo int) (apt float64) {
 	mayor := 1
 	for i := 2; i <= 3; i++ {
 		if contador[i] > mayor {
@@ -84,19 +91,24 @@ func calcularAptitud(contador map[int]int) (apt float64) {
 	apt = math.Pow(phi, float64(2*contador[analogo]))
 	apt += math.Pow(phi, float64(2*contador[complementario]))
 	apt += math.Pow(phi, float64(2*contador[monocromatico]))
+	apt *= float64(contadorBrillo)/6 + 1
 	return apt
 }
 
 func (ind *Individuo) evaluar() {
 	for i := range ind.Genotipo {
 		contador := make(map[int]int)
+		contadorBrillo := 0
 		if ind.Genotipo[i].Tono < 12 {
 			for j := 1; j < 4; j++ {
 				sig := (i + j) % 4
-				contador[relacionarTOnos(ind.Genotipo[i].Tono, ind.Genotipo[sig].Tono)]++
+				contador[relacionarTonos(ind.Genotipo[i].Tono, ind.Genotipo[sig].Tono)]++
+				if relacionarBrillos(ind.Genotipo[i].Brillo, ind.Genotipo[sig].Brillo) {
+					contadorBrillo++
+				}
 			}
 		}
-		nuevaAptitud := calcularAptitud(contador)
+		nuevaAptitud := calcularAptitud(contador, contadorBrillo)
 		if nuevaAptitud > ind.Aptitud {
 			ind.Aptitud = nuevaAptitud
 		}

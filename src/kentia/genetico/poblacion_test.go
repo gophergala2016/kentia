@@ -24,6 +24,10 @@ func TestCrearPoblacion(t *testing.T) {
 		cp.Chamarra[i].Tono = rand.Intn(prendas)
 		cp.Pantalon[i].Tono = rand.Intn(prendas)
 		cp.Playera[i].Tono = rand.Intn(prendas)
+		cp.Calzado[i].Brillo = rand.Intn(5)
+		cp.Chamarra[i].Brillo = rand.Intn(5)
+		cp.Pantalon[i].Brillo = rand.Intn(5)
+		cp.Playera[i].Brillo = rand.Intn(5)
 	}
 	mejores := Genetico(cp)
 	fmt.Println("\nLo mejor de lo mejor de lo mejor de lo mejor de lo mejor de lo mejor de lo mejor de lo mejor:\n", mejores[0], "\n", mejores[1], "\n", mejores[2])
