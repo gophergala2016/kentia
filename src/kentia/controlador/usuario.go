@@ -1,8 +1,8 @@
 package controlador
 
 import (
+	"html/template"
 	"kentia/modelo"
-	"text/template"
 
 	"gopkg.in/mgo.v2/bson"
 

@@ -27,7 +27,7 @@ func (tp *TipoPrenda) Registrar() bool {
 }
 
 //ConsultarPorID para consultar
-func (tp *TipoPrenda) ConsultarPorID() bool {
+func (tp *TipoPrenda) BuscarPorID() bool {
 	conn := conectar()
 	defer conn.desconectar()
 	err := conn.db.C(coleccionTipoPrenda).FindId(tp.ID).One(tp)
