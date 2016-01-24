@@ -23,3 +23,10 @@ func (mapa MapaInfo) ObtenerDatosRegistroPrenda() {
 		"tiposPrenda", modelo.ConsultarTiposPrenda(),
 	)
 }
+
+//ObtenerDatosCombinacion obtine los datos para mostrar en el template
+func (mapa MapaInfo) ObtenerDatosCombinacion(usuarioID string) {
+	mapa.SetInformacion(
+		"mejores", GenerarMejorCombinacion(usuarioID),
+	)
+}

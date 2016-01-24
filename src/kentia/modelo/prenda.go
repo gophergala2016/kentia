@@ -65,3 +65,8 @@ func (c *Prenda) BuscarPorID() bool {
 	}
 	return true
 }
+
+//ConsularPorTonoBrillo usca en la BD un color que coincida con el tono y el brillo
+func (c *Prenda) ConsularPorTonoBrillo() bool {
+	return true
+}
