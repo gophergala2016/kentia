@@ -25,11 +25,14 @@ func init() {
 }
 
 func cargarTemplates() {
-	html = template.Must(template.ParseFiles("public/404.html"))
+	html = template.Must(template.ParseFiles(
+		"public/404.html",
+		"templates/registroPrenda.html"))
 	servidor.SetHTMLTemplate(html)
 }
 
 func main() {
+	servidor.GET("/registroPrenda", controlador.RegistroPrendaUsuario(html))
 	servidor.POST("/registroUsuario", controlador.RegistroUsuario())
 	servidor.POST("/registroPrenda", controlador.RegistroPrenda())
 	servidor.Run(":3000")

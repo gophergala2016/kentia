@@ -1,6 +1,7 @@
 package modelo
 
 import (
+	"fmt"
 	"kentia/log"
 
 	"gopkg.in/mgo.v2/bson"
@@ -46,6 +47,8 @@ func ConsultarOcasiones() (ocasiones []Ocasion) {
 	if err != nil {
 		log.RegistrarError(err)
 	}
+	fmt.Println(ocasiones)
+
 	return ocasiones
 }
 
