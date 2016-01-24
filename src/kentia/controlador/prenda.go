@@ -11,16 +11,26 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegistroPrenda() gin.HandlerFunc {
+func RegistroPrendaPOST() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		usuarioID := GetSession(sessions.Default(c).Get("UsuarioID"))
 		if usuarioID != bson.ObjectId(0) {
 			var p modelo.Prenda
 			if c.Bind(&p) == nil {
-				if p.Registar() {
-					fmt.Println("BIEN", p)
+				u := modelo.Usuario{ID: usuarioID}
+				if u.BuscarPorID() {
+					p.ID = bson.NewObjectId()
+					p.Color.ID = bson.NewObjectId()
+					u.Prendas = append(u.Prendas, p)
+					if u.Modificar() {
+						//BIEN
+						fmt.Println(u)
+					} else {
+						fmt.Println("ALGO MAL", u)
+					}
 				} else {
-					fmt.Println("MAL", p)
+					//No se encontró el usuario D:
+					fmt.Println(u)
 				}
 			} else {
 				fmt.Println("Algo salió mal")
@@ -32,7 +42,7 @@ func RegistroPrenda() gin.HandlerFunc {
 	}
 }
 
-func RegistroPrendaUsuario(html *template.Template) gin.HandlerFunc {
+func RegistroPrendaGET(html *template.Template) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		mapa := MapaInfo{}
 		mapa.ObtenerDatosRegistroPrenda()
