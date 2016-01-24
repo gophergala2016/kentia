@@ -1,11 +1,32 @@
 package controlador
 
 import (
+	"html/template"
 	"kentia/genetico"
 	"kentia/modelo"
+	"net/http"
+
+	"github.com/gin-gonic/contrib/sessions"
+	"github.com/gin-gonic/gin"
 
 	"gopkg.in/mgo.v2/bson"
 )
+
+//GenerarCombinacionGET maneja la ruta /generarCombinacion
+func GenerarCombinacionGET(html *template.Template) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		session := sessions.Default(c)
+		usuarioID := GetSession(session.Get("UsuarioID"))
+		if usuarioID != "0" {
+			mapa := MapaInfo{}
+			mapa.ObtenerDatosCombinacion(usuarioID.Hex())
+			html.ExecuteTemplate(c.Writer, "combinacion.html", mapa)
+			return
+		}
+		c.Redirect(http.StatusTemporaryRedirect, "/")
+		return
+	}
+}
 
 //GenerarMejorCombinacion se encarga de buscar cada una de las prendas por color y birllo para generar una combinacion.
 func GenerarMejorCombinacion(usuarioID string) (prendas [][]modelo.Prenda) {

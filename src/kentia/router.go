@@ -42,5 +42,6 @@ func main() {
 	servidor.POST("/login", controlador.Login(html))
 	servidor.POST("/registroUsuario", controlador.RegistroUsuario())
 	servidor.POST("/registroPrenda", controlador.RegistroPrendaPOST())
+	servidor.GET("/generarCombinacion", controlador.GenerarCombinacionGET(html))
 	servidor.Run(":3000")
 }
