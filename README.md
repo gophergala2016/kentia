@@ -16,6 +16,10 @@ On server you have to compile the project using
 
 >Make sure you have already set your environment variable GOPATH
 
+You have to restore the database of the directory in Kentia/mongodb
+
+```mongorestore mongodb/dump```
+
 If you want to run the server just run the binary on the root directory of the project , the server needs some static resources (public,templates,etc).
 
 After you run the binary the server will use port `:3000` for listening requests.
