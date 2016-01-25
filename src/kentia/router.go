@@ -3,6 +3,8 @@ package main
 import (
 	"html/template"
 	"kentia/controlador"
+	"math/rand"
+	"time"
 
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/contrib/static"
@@ -16,6 +18,7 @@ var (
 
 func init() {
 	gin.SetMode(gin.DebugMode)
+	rand.Seed(time.Now().UnixNano())
 	servidor = gin.Default()
 
 	store := sessions.NewCookieStore([]byte("ef7fbfd3d599befe7a86cbf37c8f05c814dcad918b8dbefb441de846c4f62ea3"))

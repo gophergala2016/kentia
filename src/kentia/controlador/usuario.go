@@ -36,7 +36,7 @@ func RegistroUsuario() gin.HandlerFunc {
 			if u.Registrar() {
 				//Correcto
 				session := sessions.Default(c)
-				session.Set("UsuarioID", u.ID.String())
+				session.Set("UsuarioID", u.ID.Hex())
 				session.Save()
 				c.Redirect(http.StatusSeeOther, "/")
 				return

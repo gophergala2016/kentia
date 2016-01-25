@@ -20,7 +20,7 @@ func convertirID(s string) string {
 	return s
 }
 
-func guadarImagen(c *gin.Context, p modelo.Prenda) {
+func guadarImagen(c *gin.Context, p *modelo.Prenda) {
 	file, _, err := c.Request.FormFile("foto")
 	if err != nil {
 		c.String(http.StatusSeeOther, "Sin imagen")
@@ -31,9 +31,9 @@ func guadarImagen(c *gin.Context, p modelo.Prenda) {
 	data, _ := ioutil.ReadAll(file)
 
 	ruta := "/img/foto" + p.ID.Hex() + ".png"
-	p.Foto = "public" + ruta
+	p.Foto = ruta
 
-	out, err := os.Create(p.Foto)
+	out, err := os.Create("public" + p.Foto)
 	if err != nil {
 		c.String(http.StatusTemporaryRedirect, err.Error())
 		return
@@ -68,7 +68,7 @@ func RegistroPrendaPOST() gin.HandlerFunc {
 					p.Ocasion.ID = bson.ObjectIdHex(convertirID(c.PostForm("ocasion")))
 					p.Ocasion.BuscarPorID()
 
-					guadarImagen(c, p)
+					guadarImagen(c, &p)
 
 					u.Prendas = append(u.Prendas, p)
 					if u.Modificar() {
