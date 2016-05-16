@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Principal</title>
+    <link href="bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+    <link href="css/sidebar.css" rel="stylesheet">
+  </head>
+  <body>
+      {{$prendas := index . "prendas"}}
+
+
+      <div id="wrapper" class="">
+
+          <!-- Sidebar -->
+          <div id="sidebar-wrapper">
+              <ul class="sidebar-nav">
+                  <li class="sidebar-brand">
+                      <a href="#">
+                          Start Bootstrap
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#">Dashboard</a>
+                  </li>
+                  <li>
+                      <a href="#">Shortcuts</a>
+                  </li>
+                  <li>
+                      <a href="#">Overview</a>
+                  </li>
+                  <li>
+                      <a href="#">Events</a>
+                  </li>
+                  <li>
+                      <a href="#">About</a>
+                  </li>
+                  <li>
+                      <a href="#">Services</a>
+                  </li>
+                  <li>
+                      <a href="#">Contact</a>
+                  </li>
+              </ul>
+          </div>
+          <!-- /#sidebar-wrapper -->
+
+          <!-- Page Content -->
+          <div id="page-content-wrapper">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-lg-12">
+                        {{range $prendas}}
+                          <img src="{{.Foto}}" width="150" height="150"/>
+                        {{end}}
+                          <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                          <button onclick="javascript:location.href='/generarCombinacion'" class="btn btn-primary">Generar combinación</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- /#page-content-wrapper -->
+
+      </div>
+      <!-- /#wrapper -->
+
+      <!-- jQuery -->
+      <script src="js/jquery.js"></script>
+
+      <!-- Bootstrap Core JavaScript -->
+      <script src="js/bootstrap.min.js"></script>
+
+      <!-- Menu Toggle Script -->
+      <script>
+      $("#menu-toggle").click(function(e) {
+          e.preventDefault();
+          $("#wrapper").toggleClass("toggled");
+      });
+      </script>
+
+  </body>
+
+</html>

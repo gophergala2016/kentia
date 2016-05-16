@@ -9,7 +9,7 @@ import (
 
 const (
 	individuos   = 100
-	generaciones = 100
+	generaciones = 10
 	pm           = .1
 )
 

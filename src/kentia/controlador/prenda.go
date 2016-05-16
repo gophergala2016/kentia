@@ -53,7 +53,8 @@ func RegistroPrendaPOST() gin.HandlerFunc {
 		usuarioID := GetSession(sessions.Default(c).Get("UsuarioID"))
 		if usuarioID != "0" {
 			var p modelo.Prenda
-			if c.Bind(&p) == nil {
+			err := c.Bind(&p)
+			if err == nil {
 				u := modelo.Usuario{ID: usuarioID}
 				if u.BuscarPorID() {
 					p.ID = bson.NewObjectId()
@@ -82,7 +83,7 @@ func RegistroPrendaPOST() gin.HandlerFunc {
 					fmt.Println(u)
 				}
 			} else {
-				fmt.Println("Algo salió mal")
+				fmt.Println("Algo salió mal", err)
 			}
 			return
 		}
@@ -96,5 +97,15 @@ func RegistroPrendaGET(html *template.Template) gin.HandlerFunc {
 		mapa := MapaInfo{}
 		mapa.ObtenerDatosRegistroPrenda()
 		html.ExecuteTemplate(c.Writer, "registroPrenda.html", mapa)
+	}
+}
+
+func MuestraPrendasGET(html *template.Template) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		mapa := MapaInfo{}
+		usuarioID := GetSession(sessions.Default(c).Get("UsuarioID"))
+		fmt.Println(usuarioID)
+		mapa.ObtenerDatosPrendas(usuarioID)
+		html.ExecuteTemplate(c.Writer, "principal.html", mapa)
 	}
 }

@@ -35,7 +35,7 @@ func init() {
 func cargarTemplates() {
 	html = template.Must(template.ParseFiles(
 		"public/404.html",
-		"templates/registroPrenda.html", "templates/combinacion.html"))
+		"templates/registroPrenda.html", "templates/combinacion.html", "templates/principal.html"))
 	servidor.SetHTMLTemplate(html)
 }
 
@@ -44,6 +44,7 @@ func main() {
 		html.ExecuteTemplate(c.Writer, "combinacion.html", nil)
 	})
 	servidor.GET("/registroPrenda", controlador.RegistroPrendaGET(html))
+	servidor.GET("/principal", controlador.MuestraPrendasGET(html))
 	servidor.GET("/", controlador.Index())
 	servidor.POST("/login", controlador.Login(html))
 	servidor.POST("/registroUsuario", controlador.RegistroUsuario())

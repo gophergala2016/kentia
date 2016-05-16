@@ -1,7 +1,10 @@
 package controlador
 
 import (
+	"fmt"
 	"kentia/modelo"
+
+	"gopkg.in/mgo.v2/bson"
 )
 
 //MapaInfo se utiliza para mandarle datos a los templates.
@@ -28,5 +31,18 @@ func (mapa MapaInfo) ObtenerDatosRegistroPrenda() {
 func (mapa MapaInfo) ObtenerDatosCombinacion(usuarioID string) {
 	mapa.SetInformacion(
 		"mejores", GenerarMejorCombinacion(usuarioID),
+	)
+}
+
+//ObtenDatosPrendas obtiene las prendas de un usuario
+func (mapa MapaInfo) ObtenerDatosPrendas(usuarioID bson.ObjectId) {
+	usr := modelo.Usuario{ID: usuarioID}
+	ok := usr.BuscarPorID()
+	if !ok {
+		fmt.Println("puto!")
+	}
+	fmt.Print(usr)
+	mapa.SetInformacion(
+		"prendas", usr.Prendas,
 	)
 }
