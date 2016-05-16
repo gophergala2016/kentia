@@ -26,7 +26,7 @@ func Index() gin.HandlerFunc {
 		session := sessions.Default(c)
 		usuarioID := GetSession(session.Get("UsuarioID"))
 		if usuarioID != "0" {
-			c.Redirect(http.StatusTemporaryRedirect, "/registroPrenda")
+			c.Redirect(http.StatusTemporaryRedirect, "/principal")
 			return
 		}
 		c.Redirect(http.StatusTemporaryRedirect, "/login")
